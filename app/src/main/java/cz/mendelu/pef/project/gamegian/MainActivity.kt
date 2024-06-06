@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import cz.mendelu.pef.project.gamegian.ui.screens.FirstScreen
 import cz.mendelu.pef.project.gamegian.ui.screens.HomeScreen
+import cz.mendelu.pef.project.gamegian.ui.screens.MacroCalculator
 import cz.mendelu.pef.project.gamegian.ui.theme.GameGainTheme
 
 class MainActivity : ComponentActivity() {
@@ -34,7 +35,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             GameGainTheme {
-                HomeScreen()
+                MacroCalculator()
             }
         }
     }
