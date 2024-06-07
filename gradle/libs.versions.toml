@@ -8,10 +8,18 @@ espressoCore = "3.5.1"
 lifecycleRuntimeKtx = "2.8.0"
 activityCompose = "1.9.0"
 composeBom = "2023.08.00"
+
 numberPicker = "1.1.1"
 donutChart = "2.2.3"
 googleServices = "4.4.2"
 firebaseAuth = "23.0.0"
+navigation-compose = "2.7.7"
+room = "2.6.1"
+hilt = "2.48"
+hilt-compose = "1.1.0"
+moshi = "1.15.0"
+lifecycle = "2.7.0"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,8 +42,28 @@ donut = { group = "app.futured.donut", name = "donut-compose", version.ref = "do
 google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServices" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 
+navigation-compose = {group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose"}
+room-lifecycle = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "room" }
+
+room-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "room" }
+
+
+
+
+room-ktx = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-compiler-kapt = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-runtime = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler-kapt = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+hilt-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-compose" }
+moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
+moshi-kapt = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
+lifecycle = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+org-jetbrains-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+com-google-dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 

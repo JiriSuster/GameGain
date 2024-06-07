@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.gms.google-services")
+    alias(libs.plugins.org.jetbrains.kotlin.kapt)
+    alias(libs.plugins.com.google.dagger.hilt.android)
 }
 
 android {
@@ -71,4 +73,17 @@ dependencies {
 
     implementation(libs.composenumberpicker)
     implementation(libs.donut)
+
+    implementation(libs.navigation.compose)
+    implementation(libs.room.ktx)
+    implementation(libs.room.viewmodel)
+    implementation(libs.room.lifecycle)
+    implementation(libs.room.runtime)
+    kapt(libs.room.compiler.kapt)
+    implementation(libs.hilt)
+    implementation(libs.hilt.compose)
+    kapt(libs.hilt.compiler.kapt)
+    implementation(libs.moshi)
+    kapt(libs.moshi.kapt)
+    implementation(libs.lifecycle)
 }

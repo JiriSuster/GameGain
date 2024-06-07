@@ -1,4 +1,5 @@
-package cz.mendelu.pef.project.gamegian.ui.screens
+// MacroCalculator.kt
+package cz.mendelu.pef.project.gamegian.ui.screens.macroCalculator
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -10,41 +11,42 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Button
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MacroCalculator() {
-    val activityOptions = listOf("sedentary", "lightly active", "moderately active", "very active", "super active")
-    val goalOptions = listOf("gain muscle", "lose weight", "maintain weight")
+fun MacroCalculator(){
+    val viewModel = hiltViewModel<MacroCalculatorViewModel>()
+
+    val activityOptions = listOf("sedentary", "lightly active", "moderately active", "very active", "extra active")
+    val goalOptions = listOf("gain muscle", "maintain weight", "lose body fat")
 
     val (selectedActivity, setSelectedActivity) = remember { mutableStateOf(activityOptions[0]) }
     val (activityExpanded, setActivityExpanded) = remember { mutableStateOf(false) }
@@ -55,6 +57,8 @@ fun MacroCalculator() {
     val (age, setAge) = remember { mutableStateOf("") }
     val (weight, setWeight) = remember { mutableStateOf("") }
     val (height, setHeight) = remember { mutableStateOf("") }
+
+    val (result, setResult) = remember { mutableStateOf<MacroResult?>(null) }
 
     Scaffold(
         topBar = {
@@ -84,10 +88,9 @@ fun MacroCalculator() {
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth(0.8f)
             ) {
-
-
                 ExposedDropdownMenuBox(expanded = activityExpanded, onExpandedChange = setActivityExpanded) {
-                    TextField(modifier = Modifier.menuAnchor(),
+                    TextField(
+                        modifier = Modifier.menuAnchor(),
                         value = selectedActivity,
                         onValueChange = {},
                         readOnly = true,
@@ -112,11 +115,12 @@ fun MacroCalculator() {
                 }
             }
 
-
             Spacer(modifier = Modifier.height(8.dp))
-            
+
+            Text(text = "goal:", modifier = Modifier.fillMaxWidth(0.8f))
             ExposedDropdownMenuBox(expanded = goalExpanded, onExpandedChange = setGoalExpanded) {
-                TextField(modifier = Modifier.menuAnchor(),
+                TextField(
+                    modifier = Modifier.menuAnchor(),
                     value = selectedGoal,
                     onValueChange = {},
                     readOnly = true,
@@ -137,41 +141,56 @@ fun MacroCalculator() {
                 }
             }
 
-
-
             Spacer(modifier = Modifier.height(8.dp))
 
-            TextField(
+            OutlinedTextField(
                 value = age,
                 onValueChange = setAge,
                 label = { Text("Age") },
                 modifier = Modifier
                     .fillMaxWidth(0.8f)
-                    .padding(vertical = 8.dp)
+                    .padding(vertical = 8.dp),
+                colors = OutlinedTextFieldDefaults.colors(
+                    unfocusedBorderColor = Color(0xff6750a4)
+                )
             )
 
-            TextField(
+            OutlinedTextField(
                 value = weight,
                 onValueChange = setWeight,
                 label = { Text("Weight") },
                 modifier = Modifier
                     .fillMaxWidth(0.8f)
-                    .padding(vertical = 8.dp)
+                    .padding(vertical = 8.dp),
+                colors = OutlinedTextFieldDefaults.colors(
+                    unfocusedBorderColor = Color(0xff6750a4)
+                )
             )
 
-            TextField(
+            OutlinedTextField(
                 value = height,
                 onValueChange = setHeight,
                 label = { Text("Height") },
                 modifier = Modifier
                     .fillMaxWidth(0.8f)
-                    .padding(vertical = 8.dp)
+                    .padding(vertical = 8.dp),
+                colors = OutlinedTextFieldDefaults.colors(
+                    unfocusedBorderColor = Color(0xff6750a4)
+                )
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(
-                onClick = { /*TODO*/ },
+                onClick = {
+                    val ageInt = age.toIntOrNull()
+                    val weightDouble = weight.toDoubleOrNull()
+                    val heightDouble = height.toDoubleOrNull()
+
+                    if (ageInt != null && weightDouble != null && heightDouble != null) {
+                        setResult(viewModel.calculateMacros(ageInt, weightDouble, heightDouble, selectedActivity, selectedGoal))
+                    }
+                },
                 modifier = Modifier.fillMaxWidth(0.8f),
                 shape = RoundedCornerShape(8.dp)
             ) {
@@ -180,22 +199,33 @@ fun MacroCalculator() {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Placeholder for the result section
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(text = "Your daily intake:", fontWeight = FontWeight.Bold)
-                listOf(
-                    "Protein: 75 - 246g",
-                    "Carbs: 308g - 534g",
-                    "Fat: 66g - 115g"
-                ).forEach { intake ->
-                    Text(text = intake)
+            result?.let {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(text = "Your daily intake:", fontWeight = FontWeight.Bold)
+                    Row {
+                        NutrientItem("Protein:", it.protein)
+                        Spacer(modifier = Modifier.width(4.dp))
+                        NutrientItem("Carbs:", it.carbs)
+                        Spacer(modifier = Modifier.width(4.dp))
+                        NutrientItem("Fat:", it.fat)
+                    }
                 }
             }
         }
+    }
+}
+@Composable
+fun NutrientItem(label: String, value: Int) {
+    Box(
+        modifier = Modifier
+            .background(color = Color(0xFFFEF7FF))
+            .padding(horizontal = 24.dp, vertical = 8.dp)
+    ) {
+        Text(text = "$label \n$value g")
     }
 }
