@@ -1,4 +1,4 @@
-package cz.mendelu.pef.project.gamegian.ui.screens
+package cz.mendelu.pef.project.gamegian.ui.screens.firstScreen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

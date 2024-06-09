@@ -3,7 +3,10 @@ package cz.mendelu.pef.project.gamegian
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import cz.mendelu.pef.project.gamegian.ui.screens.macroCalculator.MacroCalculator
+import androidx.compose.foundation.layout.Column
+import cz.mendelu.pef.project.gamegian.ui.components.DonutWithText
+import cz.mendelu.pef.project.gamegian.ui.screens.firstScreen.FirstScreen
+import cz.mendelu.pef.project.gamegian.ui.screens.oneRepMax.OneRepMax
 import cz.mendelu.pef.project.gamegian.ui.theme.GameGainTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -13,7 +16,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             GameGainTheme {
-                MacroCalculator()
+                OneRepMax()
             }
         }
     }
