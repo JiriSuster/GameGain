@@ -6,8 +6,9 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import javax.inject.Inject
 
-class OneRepMaxViewModel : ViewModel() {
+class OneRepMaxViewModel @Inject constructor() : ViewModel() {
     var weight by mutableFloatStateOf(0f)
 
     var reps by mutableIntStateOf(0)

@@ -9,15 +9,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.chillibits.composenumberpicker.HorizontalNumberPicker
 import cz.mendelu.pef.project.gamegian.ui.components.DonutWithText
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OneRepMax(
-    viewModel: OneRepMaxViewModel = viewModel()
-) {
+fun OneRepMax() {
+    val viewModel = hiltViewModel<OneRepMaxViewModel>()
     var weight by remember { mutableFloatStateOf(viewModel.weight) }
     var reps by remember { mutableIntStateOf(viewModel.reps) }
     var oneRepMax by remember { mutableFloatStateOf(viewModel.oneRepMax) }

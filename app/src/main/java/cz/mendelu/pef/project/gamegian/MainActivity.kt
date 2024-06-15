@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import cz.mendelu.pef.project.gamegian.ui.components.DonutWithText
+import cz.mendelu.pef.project.gamegian.ui.screens.AddScreen
 import cz.mendelu.pef.project.gamegian.ui.screens.firstScreen.FirstScreen
 import cz.mendelu.pef.project.gamegian.ui.screens.oneRepMax.OneRepMax
 import cz.mendelu.pef.project.gamegian.ui.theme.GameGainTheme
@@ -16,7 +17,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             GameGainTheme {
-                OneRepMax()
+                AddScreen()
             }
         }
     }
