@@ -16,13 +16,16 @@ import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 import kotlinx.coroutines.flow.first
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
+import cz.mendelu.pef.project.gamegian.R
 
 @Composable
 fun FirstScreen(
     navigationRouter: INavigationRouter,
     viewModel: FirstScreenViewModel = hiltViewModel()
 ) {
-    val myDataStore = viewModel.myDataStore
+
+    val context = LocalContext.current
+    val resources = context.resources
 
     val usernameState = remember { mutableStateOf("") }
     val isMaleState = remember { mutableStateOf(true) }
@@ -40,14 +43,19 @@ fun FirstScreen(
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier.padding(16.dp)
             ) {
-                Text(text = "Join the Leaderboard!", style = MaterialTheme.typography.headlineLarge)
+                Text(
+                    text = resources.getString(R.string.join_leaderboard_title),
+                    style = MaterialTheme.typography.headlineLarge
+                )
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "Help us make your experience even better by providing some details. This will allow you to join our leaderboard and get more accurate calculations.")
+                Text(
+                    text = resources.getString(R.string.join_leaderboard_description)
+                )
                 Spacer(modifier = Modifier.height(64.dp))
                 TextField(
                     value = usernameState.value,
                     onValueChange = { usernameState.value = it },
-                    label = { Text(text = "Username") }
+                    label = { Text(text = resources.getString(R.string.username_hint)) }
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Row(
@@ -56,7 +64,7 @@ fun FirstScreen(
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text(text = "Male")
+                        Text(text = resources.getString(R.string.male_label))
                         RadioButton(
                             selected = isMaleState.value,
                             onClick = { isMaleState.value = true }
@@ -66,7 +74,7 @@ fun FirstScreen(
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text(text = "Female")
+                        Text(text = resources.getString(R.string.female_label))
                         RadioButton(
                             selected = !isMaleState.value,
                             onClick = { isMaleState.value = false }
@@ -79,7 +87,7 @@ fun FirstScreen(
                     viewModel.updateGender(isMaleState.value)
                     navigationRouter.navigateToHomeScreen()
                 }) {
-                    Text(text = "join leaderboard \uD83D\uDE0A")
+                    Text(text = resources.getString(R.string.join_button_text))
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(text = "or")
@@ -91,7 +99,7 @@ fun FirstScreen(
                         contentColor = Color.DarkGray
                     )
                 ) {
-                    Text(text = "proceed without joining \uD83D\uDE1E")
+                    Text(text = resources.getString(R.string.proceed_button_text))
                 }
             }
         }

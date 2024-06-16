@@ -41,14 +41,27 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
+// Updated imports
+import androidx.compose.ui.res.stringResource
+import cz.mendelu.pef.project.gamegian.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MacroCalculator(navigationRouter: INavigationRouter){
     val viewModel = hiltViewModel<MacroCalculatorViewModel>()
 
-    val activityOptions = listOf("sedentary", "lightly active", "moderately active", "very active", "extra active")
-    val goalOptions = listOf("gain muscle", "maintain weight", "lose body fat")
+    val activityOptions = listOf(
+        stringResource(id = R.string.sedentary),
+        stringResource(id = R.string.lightly_active),
+        stringResource(id = R.string.moderately_active),
+        stringResource(id = R.string.very_active),
+        stringResource(id = R.string.extra_active)
+    )
+    val goalOptions = listOf(
+        stringResource(id = R.string.gain_muscle),
+        stringResource(id = R.string.maintain_weight),
+        stringResource(id = R.string.lose_body_fat)
+    )
 
     val (selectedActivity, setSelectedActivity) = remember { mutableStateOf(activityOptions[0]) }
     val (activityExpanded, setActivityExpanded) = remember { mutableStateOf(false) }
@@ -68,7 +81,7 @@ fun MacroCalculator(navigationRouter: INavigationRouter){
                 title = {
                     Box(modifier = Modifier.fillMaxWidth()) {
                         Text(
-                            text = "macro calculator",
+                            text = stringResource(id = R.string.macro_calculator),
                             modifier = Modifier.align(Alignment.Center),
                             fontSize = 14.sp
                         )
@@ -92,7 +105,7 @@ fun MacroCalculator(navigationRouter: INavigationRouter){
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "activity:", modifier = Modifier.fillMaxWidth(0.8f))
+            Text(text = stringResource(id = R.string.activity), modifier = Modifier.fillMaxWidth(0.8f))
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth(0.8f)
@@ -126,7 +139,7 @@ fun MacroCalculator(navigationRouter: INavigationRouter){
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            Text(text = "goal:", modifier = Modifier.fillMaxWidth(0.8f))
+            Text(text = stringResource(id = R.string.goal), modifier = Modifier.fillMaxWidth(0.8f))
             ExposedDropdownMenuBox(expanded = goalExpanded, onExpandedChange = setGoalExpanded) {
                 TextField(
                     modifier = Modifier.menuAnchor(),
@@ -155,7 +168,7 @@ fun MacroCalculator(navigationRouter: INavigationRouter){
             OutlinedTextField(
                 value = age,
                 onValueChange = setAge,
-                label = { Text("Age") },
+                label = { Text(stringResource(id = R.string.age)) },
                 modifier = Modifier
                     .fillMaxWidth(0.8f)
                     .padding(vertical = 8.dp),
@@ -167,7 +180,7 @@ fun MacroCalculator(navigationRouter: INavigationRouter){
             OutlinedTextField(
                 value = weight,
                 onValueChange = setWeight,
-                label = { Text("Weight") },
+                label = { Text(stringResource(id = R.string.weight)) },
                 modifier = Modifier
                     .fillMaxWidth(0.8f)
                     .padding(vertical = 8.dp),
@@ -179,7 +192,7 @@ fun MacroCalculator(navigationRouter: INavigationRouter){
             OutlinedTextField(
                 value = height,
                 onValueChange = setHeight,
-                label = { Text("Height") },
+                label = { Text(stringResource(id = R.string.height)) },
                 modifier = Modifier
                     .fillMaxWidth(0.8f)
                     .padding(vertical = 8.dp),
@@ -203,7 +216,7 @@ fun MacroCalculator(navigationRouter: INavigationRouter){
                 modifier = Modifier.fillMaxWidth(0.8f),
                 shape = RoundedCornerShape(8.dp)
             ) {
-                Text(text = "calculate")
+                Text(text = stringResource(id = R.string.calculate))
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -215,19 +228,20 @@ fun MacroCalculator(navigationRouter: INavigationRouter){
                         .padding(vertical = 8.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(text = "Your daily intake:", fontWeight = FontWeight.Bold)
+                    Text(text = stringResource(id = R.string.your_daily_intake), fontWeight = FontWeight.Bold)
                     Row {
-                        NutrientItem("Protein:", it.protein)
+                        NutrientItem(stringResource(id = R.string.protein), it.protein)
                         Spacer(modifier = Modifier.width(4.dp))
-                        NutrientItem("Carbs:", it.carbs)
+                        NutrientItem(stringResource(id = R.string.carbs), it.carbs)
                         Spacer(modifier = Modifier.width(4.dp))
-                        NutrientItem("Fat:", it.fat)
+                        NutrientItem(stringResource(id = R.string.fat), it.fat)
                     }
                 }
             }
         }
     }
 }
+
 @Composable
 fun NutrientItem(label: String, value: Int) {
     Box(

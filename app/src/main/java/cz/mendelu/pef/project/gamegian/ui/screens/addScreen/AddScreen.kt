@@ -15,20 +15,37 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.chillibits.composenumberpicker.VerticalNumberPicker
 import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.chillibits.composenumberpicker.VerticalNumberPicker
+import cz.mendelu.pef.project.gamegian.R
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddScreen(navigationRouter: INavigationRouter) {
     val viewModel = hiltViewModel<AddScreenViewModel>()
     val (reps, setReps) = remember { mutableStateOf(viewModel.workouting.reps) }
     val (sets, setSets) = remember { mutableStateOf(viewModel.workouting.sets) }
-    val activityOptions = listOf("biceps curls", "push-ups", "sit-ups", "pull-ups","dips")
+    val activityOptions = listOf(
+        stringResource(R.string.activity_biceps_curls),
+        stringResource(R.string.activity_push_ups),
+        stringResource(R.string.activity_sit_ups),
+        stringResource(R.string.activity_pull_ups),
+        stringResource(R.string.activity_dips)
+    )
     val (activityExpanded, setActivityExpanded) = remember { mutableStateOf(false) }
     val (selectedActivity, setSelectedActivity) = remember { mutableStateOf(activityOptions[0]) }
 
     var sliderHoursPosition by remember { mutableStateOf(0f) }
     var sliderMinsPosition by remember { mutableStateOf(0f) }
     var steps by remember { mutableStateOf("") }
-
 
     Scaffold(
         topBar = {
@@ -37,13 +54,13 @@ fun AddScreen(navigationRouter: INavigationRouter) {
                     IconButton(onClick = {
                         navigationRouter.returnBack()
                     }) {
-                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "")
+                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = stringResource(R.string.back_button_content_description))
                     }
                 },
                 title = {
                     Box(modifier = Modifier.fillMaxWidth()) {
                         Text(
-                            text = "add time",
+                            text = stringResource(R.string.add_time_title),
                             modifier = Modifier.align(Alignment.Center),
                             fontSize = 14.sp
                         )
@@ -59,7 +76,7 @@ fun AddScreen(navigationRouter: INavigationRouter) {
         ) {
             Row(Modifier.fillMaxWidth()) {
                 Column(Modifier.weight(1f)) {
-                    Text(text = "Workouts:", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                    Text(text = stringResource(R.string.workouts_label), fontSize = 16.sp, fontWeight = FontWeight.Bold)
                     ExposedDropdownMenuBox(
                         expanded = activityExpanded,
                         onExpandedChange = setActivityExpanded
@@ -98,18 +115,18 @@ fun AddScreen(navigationRouter: INavigationRouter) {
                             viewModel.addWorkout()
                             navigationRouter.navigateToListScreen()
                         }) {
-                            Text(text = "+ Add")
+                            Text(text = stringResource(R.string.add_button_text))
                         }
                     }
                 }
                 Spacer(Modifier.width(16.dp))
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "Reps", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                    Text(text = stringResource(R.string.reps_label), fontSize = 16.sp, fontWeight = FontWeight.Bold)
                     Picker(value = reps.toFloat(), onValueChange = { setReps(it.toInt()) })
                 }
                 Spacer(Modifier.width(16.dp))
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "Sets", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                    Text(text = stringResource(R.string.sets_label), fontSize = 16.sp, fontWeight = FontWeight.Bold)
                     Picker(value = sets.toFloat(), onValueChange = { setSets(it.toInt()) })
                 }
             }
@@ -117,7 +134,7 @@ fun AddScreen(navigationRouter: INavigationRouter) {
             Spacer(Modifier.height(16.dp))
 
             Text(
-                text = "Studying",
+                text = stringResource(R.string.studying_label),
                 modifier = Modifier.padding(bottom = 16.dp),
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
@@ -127,7 +144,7 @@ fun AddScreen(navigationRouter: INavigationRouter) {
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(bottom = 16.dp)
             ) {
-                Text(text = "Hours")
+                Text(text = stringResource(R.string.hours_label))
 
                 Slider(
                     value = sliderHoursPosition,
@@ -145,7 +162,7 @@ fun AddScreen(navigationRouter: INavigationRouter) {
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(bottom = 16.dp)
             ) {
-                Text(text = "Mins")
+                Text(text = stringResource(R.string.minutes_label))
                 Slider(
                     value = sliderMinsPosition,
                     onValueChange = { sliderMinsPosition = it },
@@ -169,14 +186,14 @@ fun AddScreen(navigationRouter: INavigationRouter) {
                     viewModel.addStudying()
                     navigationRouter.navigateToListScreen()
                 }) {
-                    Text(text = "+ Add")
+                    Text(text = stringResource(R.string.add_button_text))
                 }
             }
 
             Spacer(Modifier.height(16.dp))
 
             Text(
-                text = "Walking",
+                text = stringResource(R.string.walking_label),
                 modifier = Modifier.padding(bottom = 16.dp),
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
@@ -185,7 +202,7 @@ fun AddScreen(navigationRouter: INavigationRouter) {
             OutlinedTextField(
                 value = steps,
                 onValueChange = { steps = it },
-                label = { Text(text = "steps") },
+                label = { Text(text = stringResource(R.string.steps_label)) },
                 modifier = Modifier.fillMaxWidth()
             )
 
@@ -202,7 +219,7 @@ fun AddScreen(navigationRouter: INavigationRouter) {
                     viewModel.addWalking()
                     navigationRouter.navigateToListScreen()
                 }) {
-                    Text(text = "+ Add")
+                    Text(text = stringResource(R.string.add_button_text))
                 }
             }
 

@@ -20,12 +20,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
+import cz.mendelu.pef.project.gamegian.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,7 +35,6 @@ fun EditStudyScreen(navigationRouter: INavigationRouter, id: Long) {
     val viewModel = hiltViewModel<EditStudyViewModel>()
     var sliderHoursPosition by remember { mutableStateOf(0f) }
     var sliderMinsPosition by remember { mutableStateOf(0f) }
-
 
     // Load workout from ViewModel when screen is visited
     LaunchedEffect(key1 = id) {
@@ -54,7 +55,7 @@ fun EditStudyScreen(navigationRouter: INavigationRouter, id: Long) {
                 title = {
                     Box(modifier = Modifier.fillMaxWidth()) {
                         Text(
-                            text = "Edit Study",
+                            text = stringResource(R.string.edit_study_title),
                             modifier = Modifier.align(Alignment.Center),
                             fontSize = 18.sp,
                             textAlign = TextAlign.Center
@@ -71,7 +72,7 @@ fun EditStudyScreen(navigationRouter: INavigationRouter, id: Long) {
         ) {
 
             Text(
-                text = "Studying",
+                text = stringResource(R.string.studying_label),
                 modifier = Modifier.padding(bottom = 16.dp),
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
@@ -81,7 +82,7 @@ fun EditStudyScreen(navigationRouter: INavigationRouter, id: Long) {
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(bottom = 16.dp)
             ) {
-                Text(text = "Hours")
+                Text(text = stringResource(R.string.hours_label))
 
                 Slider(
                     value = sliderHoursPosition,
@@ -99,7 +100,7 @@ fun EditStudyScreen(navigationRouter: INavigationRouter, id: Long) {
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(bottom = 16.dp)
             ) {
-                Text(text = "Mins")
+                Text(text = stringResource(R.string.minutes_label))
                 Slider(
                     value = sliderMinsPosition,
                     onValueChange = { sliderMinsPosition = it },
@@ -109,8 +110,8 @@ fun EditStudyScreen(navigationRouter: INavigationRouter, id: Long) {
                         .weight(1f)
                 )
                 Text(text = "${sliderMinsPosition.toInt()}")
-
             }
+
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -122,9 +123,8 @@ fun EditStudyScreen(navigationRouter: INavigationRouter, id: Long) {
                         studyMins = sliderMinsPosition.toInt()
                     )
                     navigationRouter.navigateToListScreen()
-
                 }) {
-                    Text(text = "Edit")
+                    Text(text = stringResource(R.string.edit_button_text))
                 }
             }
         }

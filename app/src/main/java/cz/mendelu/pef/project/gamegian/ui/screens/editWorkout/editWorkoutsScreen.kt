@@ -1,7 +1,7 @@
 package cz.mendelu.pef.project.gamegian.ui.screens.editWorkout
 
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -25,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -32,12 +33,15 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 import cz.mendelu.pef.project.gamegian.ui.screens.addScreen.Picker
+import cz.mendelu.pef.project.gamegian.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditWorkout(navigationRouter: INavigationRouter, id: Long) {
     val viewModel = hiltViewModel<EditWorkoutsViewModel>()
-    val activityOptions = listOf("biceps curls", "push-ups", "sit-ups", "pull-ups","dips")
+    val activityOptions = listOf(
+        "biceps curls", "push-ups", "sit-ups", "pull-ups", "dips"
+    )
     var activityExpanded by remember { mutableStateOf(false) }
     var selectedActivity by remember { mutableStateOf<String?>(null) }
     var reps by remember { mutableStateOf<Int?>(null) }
@@ -63,7 +67,7 @@ fun EditWorkout(navigationRouter: INavigationRouter, id: Long) {
                 title = {
                     Box(modifier = Modifier.fillMaxWidth()) {
                         Text(
-                            text = "Edit Workout",
+                            text = stringResource(id = R.string.edit_workout_title),
                             modifier = Modifier.align(Alignment.Center),
                             fontSize = 18.sp,
                             textAlign = TextAlign.Center
@@ -80,7 +84,11 @@ fun EditWorkout(navigationRouter: INavigationRouter, id: Long) {
         ) {
             Row(Modifier.fillMaxWidth()) {
                 Column(Modifier.weight(1f)) {
-                    Text(text = "Workouts:", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                    Text(
+                        text = stringResource(id = R.string.workouts_label),
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold
+                    )
                     ExposedDropdownMenuBox(
                         expanded = activityExpanded,
                         onExpandedChange = { activityExpanded = it }
@@ -90,11 +98,16 @@ fun EditWorkout(navigationRouter: INavigationRouter, id: Long) {
                             value = selectedActivity ?: "",
                             onValueChange = {},
                             readOnly = true,
-                            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = activityExpanded) }
+                            trailingIcon = {
+                                ExposedDropdownMenuDefaults.TrailingIcon(
+                                    expanded = activityExpanded
+                                )
+                            }
                         )
                         ExposedDropdownMenu(
                             expanded = activityExpanded,
-                            onDismissRequest = { activityExpanded = false }) {
+                            onDismissRequest = { activityExpanded = false }
+                        ) {
                             activityOptions.forEachIndexed { index, activity ->
                                 DropdownMenuItem(
                                     text = { Text(text = activity) },
@@ -121,22 +134,34 @@ fun EditWorkout(navigationRouter: INavigationRouter, id: Long) {
                                 navigationRouter.navigateToListScreen()
                             }
                         }) {
-                            Text(text = "Save")
+                            Text(text = stringResource(id = R.string.save_button_text))
                         }
                     }
                 }
                 Spacer(Modifier.width(16.dp))
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "Reps", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                    Text(
+                        text = stringResource(id = R.string.reps_label),
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold
+                    )
                     reps?.let {
-                        Picker(value = it.toFloat(), onValueChange = { newReps -> reps = newReps.toInt() })
+                        Picker(value = it.toFloat(), onValueChange = { newReps ->
+                            reps = newReps.toInt()
+                        })
                     }
                 }
                 Spacer(Modifier.width(16.dp))
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "Sets", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                    Text(
+                        text = stringResource(id = R.string.sets_label),
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold
+                    )
                     sets?.let {
-                        Picker(value = it.toFloat(), onValueChange = { newSets -> sets = newSets.toInt() })
+                        Picker(value = it.toFloat(), onValueChange = { newSets ->
+                            sets = newSets.toInt()
+                        })
                     }
                 }
             }

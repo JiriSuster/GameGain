@@ -9,13 +9,14 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.chillibits.composenumberpicker.HorizontalNumberPicker
 import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 import cz.mendelu.pef.project.gamegian.ui.components.DonutWithText
+import com.chillibits.composenumberpicker.HorizontalNumberPicker
+import cz.mendelu.pef.project.gamegian.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -32,7 +33,7 @@ fun OneRepMax(navigationRouter: INavigationRouter) {
                 title = {
                     Box(modifier = Modifier.fillMaxWidth()) {
                         Text(
-                            text = "One Rep Max",
+                            text = stringResource(id = R.string.one_rep_max_title),
                             modifier = Modifier.align(Alignment.Center),
                             fontSize = 14.sp
                         )
@@ -55,7 +56,7 @@ fun OneRepMax(navigationRouter: INavigationRouter) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Your one rep max is:",
+                text = stringResource(id = R.string.your_one_rep_max),
                 fontSize = 20.sp,
                 modifier = Modifier.padding(top = 16.dp)
             )
@@ -66,21 +67,21 @@ fun OneRepMax(navigationRouter: INavigationRouter) {
             )
             Spacer(modifier = Modifier.height(16.dp))
 
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "weight", fontSize = 16.sp)
-                    Picker(value = weight, onValueChange = {
-                        weight = it
-                        viewModel.updateWeight(it)
-                    })
-                }
-                Spacer(modifier = Modifier.width(16.dp))
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "reps", fontSize = 16.sp)
-                    Picker(value = reps.toFloat(), onValueChange = {
-                        reps = it.toInt()
-                        viewModel.updateReps(it.toInt())
-                    })
-                }
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(text = stringResource(id = R.string.weight_label), fontSize = 16.sp)
+                Picker(value = weight, onValueChange = {
+                    weight = it
+                    viewModel.updateWeight(it)
+                })
+            }
+            Spacer(modifier = Modifier.width(16.dp))
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(text = stringResource(id = R.string.reps_label), fontSize = 16.sp)
+                Picker(value = reps.toFloat(), onValueChange = {
+                    reps = it.toInt()
+                    viewModel.updateReps(it.toInt())
+                })
+            }
 
             Button(
                 onClick = {
@@ -90,7 +91,7 @@ fun OneRepMax(navigationRouter: INavigationRouter) {
                 },
                 modifier = Modifier.padding(vertical = 16.dp)
             ) {
-                Text(text = "calculate")
+                Text(text = stringResource(id = R.string.calculate_button))
             }
             LazyColumn {
                 items(percentages) { (percentage, weight) ->

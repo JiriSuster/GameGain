@@ -1,9 +1,6 @@
 package cz.mendelu.pef.project.gamegian.ui.screens.listScreen
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
-import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,19 +14,24 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import cz.mendelu.pef.project.gamegian.model.Study
 import cz.mendelu.pef.project.gamegian.model.Walk
 import cz.mendelu.pef.project.gamegian.model.Workout
+import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 import cz.mendelu.pef.project.gamegian.ui.components.StudyCard
 import cz.mendelu.pef.project.gamegian.ui.components.WalkCard
 import cz.mendelu.pef.project.gamegian.ui.components.WorkoutCard
+import androidx.hilt.navigation.compose.hiltViewModel
+import cz.mendelu.pef.project.gamegian.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,7 +56,7 @@ fun ListScreen(navigationRouter: INavigationRouter) {
                 title = {
                     Box(modifier = Modifier.fillMaxWidth()) {
                         Text(
-                            text = "activities",
+                            text = stringResource(id = R.string.activities_title),
                             modifier = Modifier.align(Alignment.Center),
                             fontSize = 14.sp
                         )
@@ -63,9 +65,8 @@ fun ListScreen(navigationRouter: INavigationRouter) {
             )
         }
     ) {
-
-        Column(Modifier.padding(paddingValues = it)) {
-            if(combined.isNotEmpty()) {
+        Column(Modifier.padding(it)) {
+            if (combined.isNotEmpty()) {
                 LazyColumn {
                     items(combined) { item ->
                         when (item) {
@@ -76,10 +77,9 @@ fun ListScreen(navigationRouter: INavigationRouter) {
                         }
                     }
                 }
-            }else{
-                Text(text = "Add your first activity")
+            } else {
+                Text(text = stringResource(id = R.string.add_first_activity))
             }
         }
     }
 }
-

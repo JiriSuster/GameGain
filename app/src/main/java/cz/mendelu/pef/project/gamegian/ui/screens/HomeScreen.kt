@@ -19,8 +19,11 @@ import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 import cz.mendelu.pef.project.gamegian.toReadableTime
 import kotlinx.coroutines.flow.first
 import androidx.compose.runtime.remember
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import cz.mendelu.pef.project.gamegian.R
 import cz.mendelu.pef.project.gamegian.ui.screens.addScreen.AddScreenViewModel
+import java.util.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,7 +44,7 @@ fun HomeScreen(
     val usernameState by produceState<String?>(initialValue = null) {
         value = myDataStore.watchUsername().first()
     }
-    val username = usernameState
+    val username = usernameState ?: ""
 
     // Observe the time
     val timeState by produceState<Long?>(initialValue = null) {
@@ -55,7 +58,7 @@ fun HomeScreen(
                 title = {
                     Box(modifier = Modifier.fillMaxWidth()) {
                         Text(
-                            text = "timer",
+                            text = stringResource(id = R.string.timer_title),
                             modifier = Modifier.align(Alignment.Center),
                             fontSize = 14.sp
                         )
@@ -71,21 +74,21 @@ fun HomeScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            
+
             Button(onClick = { navigationRouter.navigateToLeaderBoard() }) {
-                Text(text = "leaderboard")
+                Text(text = stringResource(id = R.string.leaderboard_button))
             }
             Button(onClick = {navigationRouter.navigateToMacroCalculator()}) {
-                Text(text = "macro calculator")
+                Text(text = stringResource(id = R.string.macro_calculator_button))
 
             }
             Button(onClick = {navigationRouter.navigateToOneRepMax()}) {
-                Text(text = "one rep max")
+                Text(text = stringResource(id = R.string.one_rep_max_button))
 
             }
             Text(text = appVersion)
             Text(
-                text = "Welcome, ${username ?: "Guest"}!",
+                text = stringResource(id = if (username.isNotEmpty()) R.string.welcome_message else R.string.guest_welcome_message, username),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold
             )
@@ -93,7 +96,7 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(32.dp))
 
             Text(
-                text = "You can play for:",
+                text = stringResource(id = R.string.play_for),
                 fontSize = 16.sp,
             )
 
@@ -116,7 +119,7 @@ fun HomeScreen(
                     contentColor = Color(0xFF7E57C2)
                 )
             ) {
-                Text(text = "start timer")
+                Text(text = stringResource(id = R.string.start_timer_button))
             }
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -132,18 +135,18 @@ fun HomeScreen(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,
-                        contentDescription = "Add Icon",
+                        contentDescription = stringResource(id = R.string.add_time_button),
                         tint = Color.White
                     )
                     Spacer(modifier = Modifier.width(4.dp))
-                    Text(text = "add time", color = Color.White)
+                    Text(text = stringResource(id = R.string.add_time_button), color = Color.White)
                 }
                 Button(
                     onClick = { navigationRouter.navigateToListScreen() },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF6750A4)),
                     modifier = Modifier.padding(8.dp)
                 ) {
-                    Text(text = "activities", color = Color.White)
+                    Text(text = stringResource(id = R.string.activities_button), color = Color.White)
                 }
             }
         }

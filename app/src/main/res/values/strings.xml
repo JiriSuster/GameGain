@@ -1,3 +1,79 @@
 <resources>
-    <string name="app_name">GameGain</string>
+    <string name="app_name">MacroCalculator</string>
+    <string name="macro_calculator">macro calculator</string>
+    <string name="activity">activity:</string>
+    <string name="goal">goal:</string>
+    <string name="age">Age</string>
+    <string name="weight">Weight</string>
+    <string name="height">Height</string>
+    <string name="calculate">calculate</string>
+    <string name="your_daily_intake">Your daily intake:</string>
+    <string name="protein">Protein:</string>
+    <string name="carbs">Carbs:</string>
+    <string name="fat">Fat:</string>
+    <string name="sedentary">sedentary</string>
+    <string name="lightly_active">lightly active</string>
+    <string name="moderately_active">moderately active</string>
+    <string name="very_active">very active</string>
+    <string name="extra_active">extra active</string>
+    <string name="gain_muscle">gain muscle</string>
+    <string name="maintain_weight">maintain weight</string>
+    <string name="lose_body_fat">lose body fat</string>
+    <string name="back_button_content_description">Back</string>
+    <string name="add_time_title">Add Time</string>
+    <string name="workouts_label">Workouts:</string>
+    <string name="add_button_text">+ Add</string>
+    <string name="reps_label">Reps</string>
+    <string name="sets_label">Sets</string>
+    <string name="studying_label">Studying</string>
+    <string name="hours_label">Hours</string>
+    <string name="minutes_label">Mins</string>
+    <string name="walking_label">Walking</string>
+    <string name="steps_label">steps</string>
+    <string name="activity_biceps_curls">biceps curls</string>
+    <string name="activity_push_ups">push-ups</string>
+    <string name="activity_sit_ups">sit-ups</string>
+    <string name="activity_pull_ups">pull-ups</string>
+    <string name="activity_dips">dips</string>
+
+    <string name="edit_study_title">Edit Study</string>
+    <string name="edit_button_text">Edit</string>
+
+    <string name="edit_walk_title">Edit Walking</string>
+
+    <string name="edit_workout_title">Edit Workout</string>
+    <string name="save_button_text">Save</string>
+
+    <string name="join_leaderboard_title">Join the Leaderboard!</string>
+    <string name="join_leaderboard_description">Help us make your experience even better by providing some details. This will allow you to join our leaderboard and get more accurate calculations.</string>
+    <string name="username_hint">Username</string>
+    <string name="male_label">Male</string>
+    <string name="female_label">Female</string>
+    <string name="join_button_text">Join leaderboard \uD83D\uDE0A</string>
+    <string name="proceed_button_text">Proceed without joining \uD83D\uDE1E</string>
+
+    <string name="activities_title">Activities</string>
+    <string name="add_first_activity">Add your first activity</string>
+
+    <string name="one_rep_max_title">One Rep Max</string>
+    <string name="your_one_rep_max">Your one rep max is:</string>
+    <string name="calculate_button">Calculate</string>
+    <string name="weight_label">Weight</string>
+
+    <string name="timer_title">Timer</string>
+    <string name="leaderboard_button">Leaderboard</string>
+    <string name="macro_calculator_button">Macro Calculator</string>
+    <string name="one_rep_max_button">One Rep Max</string>
+    <string name="welcome_message">Welcome, %s!</string>
+    <string name="guest_welcome_message">Welcome, Guest!</string>
+    <string name="play_for">You can play for:</string>
+    <string name="start_timer_button">Start Timer</string>
+    <string name="add_time_button">Add Time</string>
+    <string name="activities_button">Activities</string>
+
+    <string name="username_label">Username:</string>
+    <string name="score_label">Score:</string>
+    <string name="leaderboard_title">leaderboard</string>
+
+
 </resources>

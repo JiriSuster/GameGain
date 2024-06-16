@@ -21,19 +21,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
+import cz.mendelu.pef.project.gamegian.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditWalkScreen(navigationRouter: INavigationRouter, id: Long) {
     val viewModel = hiltViewModel<EditWalkViewModel>()
     var steps by remember { mutableStateOf(0) }
-
 
     // Load workout from ViewModel when screen is visited
     LaunchedEffect(key1 = id) {
@@ -53,7 +54,7 @@ fun EditWalkScreen(navigationRouter: INavigationRouter, id: Long) {
                 title = {
                     Box(modifier = Modifier.fillMaxWidth()) {
                         Text(
-                            text = "Edit Study",
+                            text = stringResource(R.string.edit_walk_title),
                             modifier = Modifier.align(Alignment.Center),
                             fontSize = 18.sp,
                             textAlign = TextAlign.Center
@@ -70,7 +71,7 @@ fun EditWalkScreen(navigationRouter: INavigationRouter, id: Long) {
         ) {
 
             Text(
-                text = "Walking",
+                text = stringResource(R.string.walking_label),
                 modifier = Modifier.padding(bottom = 16.dp),
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
@@ -79,7 +80,7 @@ fun EditWalkScreen(navigationRouter: INavigationRouter, id: Long) {
             OutlinedTextField(
                 value = steps.toString(),
                 onValueChange = { steps = it.toInt() },
-                label = { Text(text = "steps") },
+                label = { Text(text = stringResource(R.string.steps_label)) },
                 modifier = Modifier.fillMaxWidth()
             )
 
@@ -96,9 +97,8 @@ fun EditWalkScreen(navigationRouter: INavigationRouter, id: Long) {
                     )
                     navigationRouter.navigateToListScreen()
                 }) {
-                    Text(text = "Edit")
+                    Text(text = stringResource(R.string.edit_button_text))
                 }
-
             }
         }
     }
