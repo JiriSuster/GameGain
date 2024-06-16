@@ -2,6 +2,15 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="StudyCardPreview">
+        <State />
+      </entry>
+      <entry key="WalkCardPreview">
+        <State />
+      </entry>
+      <entry key="WorkoutcardPreview">
+        <State />
+      </entry>
       <entry key="app">
         <State>
           <targetSelectedWithDropDown>

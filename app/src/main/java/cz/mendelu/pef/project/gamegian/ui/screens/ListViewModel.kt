@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,32 +23,26 @@ class ListViewModel @Inject constructor(
     private val walkingRepository: ILocalWalkRepository
 ) : ViewModel() {
 
-    private val _studies = MutableStateFlow<List<Study>>(emptyList())
-    val studies: StateFlow<List<Study>> = _studies
-
-    private val _workouts = MutableStateFlow<List<Workout>>(emptyList())
-    val workouts: StateFlow<List<Workout>> = _workouts
-
-    private val _walks = MutableStateFlow<List<Walk>>(emptyList())
-    val walks: StateFlow<List<Walk>> = _walks
+    private val _combined = MutableStateFlow<List<Any>>(emptyList())
+    val combined: StateFlow<List<Any>> = _combined
 
     fun loadAll() {
         viewModelScope.launch {
-            studyRepository.getAll().collect { studiesList ->
-                _studies.value = studiesList
-            }
-        }
+            val studiesList = studyRepository.getAll().firstOrNull()?.sortedByDescending { it.date } ?: emptyList()
+            val walksList = walkingRepository.getAll().firstOrNull()?.sortedByDescending { it.date } ?: emptyList()
+            val workoutsList = workoutRepository.getAll().firstOrNull()?.sortedByDescending { it.date } ?: emptyList()
 
-        viewModelScope.launch {
-            walkingRepository.getAll().collect { walksList ->
-                _walks.value = walksList
+            val combinedList = (studiesList + walksList + workoutsList).sortedByDescending { item ->
+                when (item) {
+                    is Study -> item.date
+                    is Walk -> item.date
+                    is Workout -> item.date
+                    else -> throw IllegalArgumentException("Unknown type")
+                }
             }
-        }
 
-        viewModelScope.launch {
-            workoutRepository.getAll().collect { workoutsList ->
-                _workouts.value = workoutsList
-            }
+            _combined.value = combinedList
         }
     }
+
 }

@@ -54,13 +54,13 @@ class AddScreenViewModel @Inject constructor(
         studyHours: Int = 0,
         studyMinutes: Int = 0
     ): Long {
-        val walkingRewardSeconds = walkingSteps * 0.18 // 1 step = 0.18 seconds reward
-        val workoutRewardSeconds = 5 * workoutSets  +  2 * workoutReps
-        val studyRewardSeconds = (studyHours * 3600 + studyMinutes * 60) * 0.1667 * 10 / 60 // 1 hour = 10 seconds reward
-
+        val walkingRewardSeconds = walkingSteps * 0.18
+        val workoutRewardSeconds = workoutSets * 400 + workoutReps * 65
+        val studyRewardSeconds = (studyHours * 3600 + studyMinutes * 60) * 15 / 60
 
         return (walkingRewardSeconds + workoutRewardSeconds + studyRewardSeconds).toLong()
     }
+
 
 
 }
