@@ -45,4 +45,21 @@ class ListViewModel @Inject constructor(
         }
     }
 
+    fun deleteItem(item: Any) {
+        viewModelScope.launch {
+            when (item) {
+                is Study -> {
+                    studyRepository.delete(item)
+                }
+                is Walk -> {
+                    walkingRepository.delete(item)
+                }
+                is Workout -> {
+                    workoutRepository.delete(item)
+                }
+                else -> throw IllegalArgumentException("Unknown item type")
+            }
+            loadAll()
+        }
+    }
 }
