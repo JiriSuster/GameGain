@@ -9,6 +9,7 @@ import cz.mendelu.pef.project.gamegian.model.Study
 import cz.mendelu.pef.project.gamegian.model.Walk
 import cz.mendelu.pef.project.gamegian.model.Workout
 import cz.mendelu.pef.project.gamegian.utils.calculateTime
+import cz.mendelu.pef.project.gamegian.MyDataStore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,7 +18,8 @@ import javax.inject.Inject
 class AddScreenViewModel @Inject constructor(
     private val walkRepository: LocalWalkRepository,
     private val studyRepository: LocalStudyRepository,
-    private val workoutRepository: LocalWorkoutRepository
+    private val workoutRepository: LocalWorkoutRepository,
+    val myDataStore: MyDataStore
 ) : ViewModel() {
 
     var walking: Walk = Walk(0)
@@ -25,10 +27,11 @@ class AddScreenViewModel @Inject constructor(
     var workouting: Workout = Workout(0)
 
     fun addWorkout() {
-        val time = calculateTime(workoutReps = workouting.reps, workoutSets =  workouting.sets)
+        val time = calculateTime(workoutReps = workouting.reps, workoutSets = workouting.sets)
         workouting.time = time
         viewModelScope.launch {
             workoutRepository.insert(workouting)
+            myDataStore.appendTime(time)
         }
     }
 
@@ -37,6 +40,7 @@ class AddScreenViewModel @Inject constructor(
         studying.time = time
         viewModelScope.launch {
             studyRepository.insert(studying)
+            myDataStore.appendTime(time)
         }
     }
 
@@ -45,11 +49,7 @@ class AddScreenViewModel @Inject constructor(
         walking.time = time
         viewModelScope.launch {
             walkRepository.insert(walking)
+            myDataStore.appendTime(time)
         }
     }
-
-
-
-
-
 }

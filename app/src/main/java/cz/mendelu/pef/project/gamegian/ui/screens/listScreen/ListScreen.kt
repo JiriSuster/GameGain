@@ -65,15 +65,19 @@ fun ListScreen(navigationRouter: INavigationRouter) {
     ) {
 
         Column(Modifier.padding(paddingValues = it)) {
-            LazyColumn {
-                items(combined) { item ->
-                    when (item) {
-                        is Study -> StudyCard(item, viewModel::deleteItem, navigationRouter)
-                        is Walk -> WalkCard(item, viewModel::deleteItem, navigationRouter)
-                        is Workout -> WorkoutCard(item, viewModel::deleteItem, navigationRouter)
-                        else -> Text("Unsupported item type")
+            if(combined.isNotEmpty()) {
+                LazyColumn {
+                    items(combined) { item ->
+                        when (item) {
+                            is Study -> StudyCard(item, viewModel::deleteItem, navigationRouter)
+                            is Walk -> WalkCard(item, viewModel::deleteItem, navigationRouter)
+                            is Workout -> WorkoutCard(item, viewModel::deleteItem, navigationRouter)
+                            else -> Text("Unsupported item type")
+                        }
                     }
                 }
+            }else{
+                Text(text = "Add your first activity")
             }
         }
     }

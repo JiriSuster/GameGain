@@ -1,6 +1,5 @@
 package cz.mendelu.pef.project.gamegian.ui.screens
 
-import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -19,34 +18,36 @@ import cz.mendelu.pef.project.gamegian.MyDataStore
 import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 import cz.mendelu.pef.project.gamegian.toReadableTime
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
-import android.content.pm.PackageManager
 import androidx.compose.runtime.remember
+import androidx.hilt.navigation.compose.hiltViewModel
+import cz.mendelu.pef.project.gamegian.ui.screens.addScreen.AddScreenViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(navigationRouter: INavigationRouter) {
-    val context = LocalContext.current
-    val myDataStore = MyDataStore(context)
+fun HomeScreen(
+    navigationRouter: INavigationRouter,
+    viewModel: AddScreenViewModel = hiltViewModel()
+) {
+    val myDataStore = viewModel.myDataStore
 
     // Fetch the app version using PackageManager
+    val context = LocalContext.current
     val packageInfo = remember {
         context.packageManager.getPackageInfo(context.packageName, 0)
     }
     val appVersion = packageInfo.versionName
 
     // Observe the username
-    val usernameState = produceState<String?>(initialValue = null) {
+    val usernameState by produceState<String?>(initialValue = null) {
         value = myDataStore.watchUsername().first()
     }
-    val username = usernameState.value
+    val username = usernameState
 
     // Observe the time
-    val timeState = produceState<Long?>(initialValue = null) {
+    val timeState by produceState<Long?>(initialValue = null) {
         value = myDataStore.watchTime().first()
     }
-    val time = timeState.value ?: 0L
+    val time = timeState ?: 0L
 
     Scaffold(
         topBar = {
@@ -85,7 +86,7 @@ fun HomeScreen(navigationRouter: INavigationRouter) {
             )
 
             Text(
-                text = time.toReadableTime(),
+                text = time?.toReadableTime() ?: "00:00:00",
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold,
             )
@@ -113,7 +114,7 @@ fun HomeScreen(navigationRouter: INavigationRouter) {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Button(
-                    onClick = { navigationRouter.navigateToAddScreen()  },
+                    onClick = { navigationRouter.navigateToAddScreen() },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF6750A4)),
                     modifier = Modifier.padding(8.dp)
                 ) {
@@ -130,7 +131,7 @@ fun HomeScreen(navigationRouter: INavigationRouter) {
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF6750A4)),
                     modifier = Modifier.padding(8.dp)
                 ) {
-                    Text(text = "workouts", color = Color.White)
+                    Text(text = "activities", color = Color.White)
                 }
             }
         }

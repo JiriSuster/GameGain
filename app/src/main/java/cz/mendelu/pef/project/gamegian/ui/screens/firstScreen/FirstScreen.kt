@@ -1,26 +1,11 @@
 package cz.mendelu.pef.project.gamegian.ui.screens.firstScreen
 
-import android.content.Context
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.RadioButton
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,14 +13,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import cz.mendelu.pef.project.gamegian.MyDataStore
 import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.flow.first
+import androidx.compose.runtime.remember
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun FirstScreen(navigationRouter: INavigationRouter) {
-    val context = LocalContext.current
-    val myDataStore = MyDataStore(context)
+fun FirstScreen(
+    navigationRouter: INavigationRouter,
+    viewModel: FirstScreenViewModel = hiltViewModel()
+) {
+    val myDataStore = viewModel.myDataStore
 
     val usernameState = remember { mutableStateOf("") }
     val isMaleState = remember { mutableStateOf(true) }
@@ -88,12 +75,8 @@ fun FirstScreen(navigationRouter: INavigationRouter) {
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(onClick = {
-                    runBlocking {
-                        launch(Dispatchers.IO) {
-                            myDataStore.updateUsername(usernameState.value)
-                            myDataStore.updateGender(isMaleState.value)
-                        }
-                    }
+                    viewModel.updateUsername(usernameState.value)
+                    viewModel.updateGender(isMaleState.value)
                     navigationRouter.navigateToHomeScreen()
                 }) {
                     Text(text = "join leaderboard \uD83D\uDE0A")
