@@ -8,6 +8,7 @@ import cz.mendelu.pef.project.gamegian.database.LocalWorkoutRepository
 import cz.mendelu.pef.project.gamegian.model.Study
 import cz.mendelu.pef.project.gamegian.model.Walk
 import cz.mendelu.pef.project.gamegian.model.Workout
+import cz.mendelu.pef.project.gamegian.utils.calculateTime
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -47,19 +48,7 @@ class AddScreenViewModel @Inject constructor(
         }
     }
 
-    private fun calculateTime(
-        walkingSteps: Int = 0,
-        workoutSets: Int = 0,
-        workoutReps: Int = 0,
-        studyHours: Int = 0,
-        studyMinutes: Int = 0
-    ): Long {
-        val walkingRewardSeconds = walkingSteps * 0.18
-        val workoutRewardSeconds = workoutSets * 400 + workoutReps * 65
-        val studyRewardSeconds = (studyHours * 3600 + studyMinutes * 60) * 15 / 60
 
-        return (walkingRewardSeconds + workoutRewardSeconds + studyRewardSeconds).toLong()
-    }
 
 
 

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cz.mendelu.pef.project.gamegian.database.LocalStudyRepository
 import cz.mendelu.pef.project.gamegian.model.Study
+import cz.mendelu.pef.project.gamegian.utils.calculateTime
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,6 +31,7 @@ class EditStudyViewModel @Inject constructor(
         currentStudy?.let { study ->
             study.studyMinutes = studyMins
             study.studyHours = studyHours
+            study.time = calculateTime(studyHours = studyHours, studyMinutes = studyMins)
             viewModelScope.launch {
                 studyRepository.update(study)
             }

@@ -1,7 +1,6 @@
-package cz.mendelu.pef.project.gamegian.ui.screens
+package cz.mendelu.pef.project.gamegian.ui.screens.EditWalkScreen
 
 import cz.mendelu.pef.project.gamegian.database.ILocalWalkRepository
-import cz.mendelu.pef.project.gamegian.database.LocalWalkRepository
 import cz.mendelu.pef.project.gamegian.model.Walk
 
 import androidx.compose.runtime.getValue
@@ -9,7 +8,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import cz.mendelu.pef.project.gamegian.model.Study
+import cz.mendelu.pef.project.gamegian.utils.calculateTime
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -32,6 +31,7 @@ class EditWalkViewModel @Inject constructor(
     fun updateWalk(steps: Int) {
         currentWalk?.let { walk ->
             walk.steps = steps
+            walk.time = calculateTime(walkingSteps = steps)
             viewModelScope.launch {
                 walkRepository.update(walk)
             }

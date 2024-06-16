@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cz.mendelu.pef.project.gamegian.database.LocalWorkoutRepository
 import cz.mendelu.pef.project.gamegian.model.Workout
+import cz.mendelu.pef.project.gamegian.utils.calculateTime
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -31,6 +32,7 @@ class EditWorkoutsViewModel @Inject constructor(
             workout.exercise_name = exerciseName
             workout.reps = reps
             workout.sets = sets
+            workout.time = calculateTime(workoutReps = reps, workoutSets = sets)
             viewModelScope.launch {
                 workoutRepository.update(workout)
             }
