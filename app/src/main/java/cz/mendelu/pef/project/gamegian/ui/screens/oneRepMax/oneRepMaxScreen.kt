@@ -3,6 +3,8 @@ package cz.mendelu.pef.project.gamegian.ui.screens.oneRepMax
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -12,11 +14,12 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.chillibits.composenumberpicker.HorizontalNumberPicker
+import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 import cz.mendelu.pef.project.gamegian.ui.components.DonutWithText
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OneRepMax() {
+fun OneRepMax(navigationRouter: INavigationRouter) {
     val viewModel = hiltViewModel<OneRepMaxViewModel>()
     var weight by remember { mutableFloatStateOf(viewModel.weight) }
     var reps by remember { mutableIntStateOf(viewModel.reps) }
@@ -33,6 +36,13 @@ fun OneRepMax() {
                             modifier = Modifier.align(Alignment.Center),
                             fontSize = 14.sp
                         )
+                    }
+                },
+                navigationIcon = {
+                    IconButton(onClick = {
+                        navigationRouter.navigateToHomeScreen()
+                    }) {
+                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "")
                     }
                 }
             )

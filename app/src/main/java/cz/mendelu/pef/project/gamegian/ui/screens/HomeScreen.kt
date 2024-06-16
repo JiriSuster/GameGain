@@ -71,6 +71,14 @@ fun HomeScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Button(onClick = {navigationRouter.navigateToMacroCalculator()}) {
+                Text(text = "macro calculator")
+
+            }
+            Button(onClick = {navigationRouter.navigateToOneRepMax()}) {
+                Text(text = "one rep max")
+
+            }
             Text(text = appVersion)
             Text(
                 text = "Welcome, ${username ?: "Guest"}!",

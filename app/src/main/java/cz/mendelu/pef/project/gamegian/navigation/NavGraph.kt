@@ -31,7 +31,7 @@ fun NavGraph(
     NavHost(navController = navHostController, startDestination = startDestination) {
 
         composable(Destination.OneRepMax.route) {
-            OneRepMax()
+            OneRepMax(navigationRouter)
         }
 
         composable(Destination.HomeScreen.route) {
@@ -39,7 +39,7 @@ fun NavGraph(
         }
 
         composable(Destination.MacroCalculator.route) {
-            MacroCalculator()
+            MacroCalculator(navigationRouter)
         }
 
         composable(Destination.FirstScreen.route) {
