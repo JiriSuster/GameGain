@@ -8,7 +8,7 @@ import cz.mendelu.pef.project.gamegian.model.Study
 import cz.mendelu.pef.project.gamegian.model.Walk
 import cz.mendelu.pef.project.gamegian.model.Workout
 
-@Database(entities = [Walk::class,Study::class,Workout::class], version = 2, exportSchema = true)
+@Database(entities = [Walk::class,Study::class,Workout::class], version = 3, exportSchema = true)
 abstract class MyDatabase : RoomDatabase() {
 
     abstract fun studyDao(): StudyDao

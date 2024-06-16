@@ -12,6 +12,7 @@ import androidx.room.PrimaryKey
         var reps: Int = 0
         var sets: Int = 0
         var exercise_name: String = "name"
+        var date: Long = 0
 
 
     }

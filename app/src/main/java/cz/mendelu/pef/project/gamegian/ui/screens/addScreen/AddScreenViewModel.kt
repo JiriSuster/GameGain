@@ -1,4 +1,4 @@
-package cz.mendelu.pef.project.gamegian.ui.screens
+package cz.mendelu.pef.project.gamegian.ui.screens.addScreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

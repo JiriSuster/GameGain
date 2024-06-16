@@ -1,4 +1,4 @@
-package cz.mendelu.pef.project.gamegian.ui.screens
+package cz.mendelu.pef.project.gamegian.ui.screens.addScreen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -11,20 +11,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.chillibits.composenumberpicker.VerticalNumberPicker
+import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddScreen() {
+fun AddScreen(navigationRouter: INavigationRouter) {
     val viewModel = hiltViewModel<AddScreenViewModel>()
     val (reps, setReps) = remember { mutableStateOf(viewModel.workouting.reps) }
     val (sets, setSets) = remember { mutableStateOf(viewModel.workouting.sets) }
-    val activityOptions = listOf("biceps curls", "push-ups", "sit-ups")
+    val activityOptions = listOf("biceps curls", "push-ups", "sit-ups", "pull-ups","dips")
     val (activityExpanded, setActivityExpanded) = remember { mutableStateOf(false) }
     val (selectedActivity, setSelectedActivity) = remember { mutableStateOf(activityOptions[0]) }
 
     var sliderHoursPosition by remember { mutableStateOf(0f) }
     var sliderMinsPosition by remember { mutableStateOf(0f) }
     var steps by remember { mutableStateOf("") }
+
 
     Scaffold(
         topBar = {
@@ -84,7 +86,9 @@ fun AddScreen() {
                             viewModel.workouting.exercise_name = selectedActivity
                             viewModel.workouting.reps = reps
                             viewModel.workouting.sets = sets
+                            viewModel.workouting.date = System.currentTimeMillis()
                             viewModel.addWorkout()
+                            navigationRouter.navigateToListScreen()
                         }) {
                             Text(text = "+ Add")
                         }
@@ -153,7 +157,9 @@ fun AddScreen() {
                 Button(onClick = {
                     viewModel.studying.studyHours = sliderHoursPosition.toInt()
                     viewModel.studying.studyMinutes = sliderMinsPosition.toInt()
+                    viewModel.studying.date = System.currentTimeMillis()
                     viewModel.addStudying()
+                    navigationRouter.navigateToListScreen()
                 }) {
                     Text(text = "+ Add")
                 }
@@ -184,7 +190,9 @@ fun AddScreen() {
             ) {
                 Button(onClick = {
                     viewModel.walking.steps = steps.toInt()
+                    viewModel.walking.date = System.currentTimeMillis()
                     viewModel.addWalking()
+                    navigationRouter.navigateToListScreen()
                 }) {
                     Text(text = "+ Add")
                 }

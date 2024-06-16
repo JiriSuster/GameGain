@@ -3,11 +3,8 @@ package cz.mendelu.pef.project.gamegian
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import cz.mendelu.pef.project.gamegian.ui.components.DonutWithText
-import cz.mendelu.pef.project.gamegian.ui.screens.AddScreen
-import cz.mendelu.pef.project.gamegian.ui.screens.firstScreen.FirstScreen
-import cz.mendelu.pef.project.gamegian.ui.screens.oneRepMax.OneRepMax
+import cz.mendelu.pef.project.gamegian.navigation.Destination
+import cz.mendelu.pef.project.gamegian.navigation.NavGraph
 import cz.mendelu.pef.project.gamegian.ui.theme.GameGainTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,7 +14,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             GameGainTheme {
-                AddScreen()
+                NavGraph(startDestination = Destination.AddTimeScreen.route)
             }
         }
     }

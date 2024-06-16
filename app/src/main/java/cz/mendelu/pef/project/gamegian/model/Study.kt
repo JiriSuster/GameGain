@@ -11,6 +11,7 @@ import androidx.room.PrimaryKey
 
         var studyHours: Int = 0
         var studyMinutes: Int = 0
+        var date: Long = 0
 
 
     }

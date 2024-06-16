@@ -10,6 +10,7 @@ data class Walk(var time: Long){
         var id: Long? = null
 
         var steps: Int = 0
+        var date: Long = 0
 
 }
 
