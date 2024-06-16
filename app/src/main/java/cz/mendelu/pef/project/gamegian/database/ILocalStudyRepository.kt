@@ -12,4 +12,5 @@ interface ILocalStudyRepository {
 
     suspend fun delete(study: Study)
     suspend fun update(study: Study)
+    suspend fun getStudy(id: Long): Study
 }

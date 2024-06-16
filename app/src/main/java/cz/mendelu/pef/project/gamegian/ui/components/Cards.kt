@@ -17,16 +17,16 @@ import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 import cz.mendelu.pef.project.gamegian.toReadableTime
 
 @Composable
-fun StudyCard(study: Study, onDelete: (Any) -> Unit) {
+fun StudyCard(study: Study, onDelete: (Any) -> Unit,navigationRouter: INavigationRouter) {
     Row {
-        Checkbox(checked = false, onCheckedChange = { /* TODO: Handle checkbox state */ })
+        Checkbox(checked = false, onCheckedChange = {  })
 
         Column {
             Text(text = "studying ${study.studyHours}h ${study.studyMinutes}m")
             Text(text = study.time.toReadableTime())
         }
 
-        IconButton(onClick = { /* TODO: Handle edit action */ }) {
+        IconButton(onClick = { navigationRouter.navigateToEditStudy(study.id!!) }) {
             Icon(imageVector = Icons.Default.Create, contentDescription = null)
         }
 

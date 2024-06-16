@@ -36,6 +36,10 @@ class NavigationRouterImpl(private val navController: NavController) : INavigati
     navController.navigate(Destination.EditWorkout.route + "/" + id)
     }
 
+    override fun navigateToEditStudy(id: Long) {
+        navController.navigate(Destination.EditStudy.route + "/" + id)
+    }
+
     override fun returnBack() {
         navController.popBackStack()
     }

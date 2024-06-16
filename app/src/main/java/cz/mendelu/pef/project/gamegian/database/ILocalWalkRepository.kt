@@ -12,4 +12,5 @@ interface ILocalWalkRepository {
     suspend fun delete(walk: Walk)
 
     suspend fun update(walk: Walk)
+    suspend fun getWalk(id: Long): Walk
 }

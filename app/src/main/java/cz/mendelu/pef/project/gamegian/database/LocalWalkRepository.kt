@@ -21,4 +21,8 @@ class LocalWalkRepository @Inject constructor(private val dao: WalkDao) : ILocal
     override suspend fun update(walk: Walk) {
         dao.update(walk)
     }
+
+    override suspend fun getWalk(id: Long): Walk {
+        return dao.getWalk(id)
+    }
 }

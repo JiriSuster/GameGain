@@ -30,7 +30,7 @@ fun ListScreen(navigationRouter: INavigationRouter) {
         LazyColumn {
             items(combined) { item ->
                 when (item) {
-                    is Study -> StudyCard(item, viewModel::deleteItem)
+                    is Study -> StudyCard(item, viewModel::deleteItem,navigationRouter)
                     is Walk -> WalkCard(item, viewModel::deleteItem)
                     is Workout -> WorkoutCard(item, viewModel::deleteItem, navigationRouter)
                     else -> Text("Unsupported item type")

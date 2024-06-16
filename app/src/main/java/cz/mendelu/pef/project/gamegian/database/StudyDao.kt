@@ -24,4 +24,7 @@ interface StudyDao {
     @Update
     suspend fun update(study: Study)
 
+    @Query("SELECT * from study WHERE id = :id")
+    suspend fun getStudy(id: Long): Study
+
 }

@@ -25,4 +25,6 @@ interface WalkDao {
     @Update
     suspend fun update(walk: Walk)
 
+    @Query("SELECT * from walk WHERE id = :id")
+    suspend fun getWalk(id: Long): Walk
 }
