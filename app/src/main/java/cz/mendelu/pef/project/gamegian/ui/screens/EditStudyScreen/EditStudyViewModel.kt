@@ -1,4 +1,4 @@
-package cz.mendelu.pef.project.gamegian.ui.screens.editWorkout
+package cz.mendelu.pef.project.gamegian.ui.screens.EditStudyScreen
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -6,9 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cz.mendelu.pef.project.gamegian.database.LocalStudyRepository
-import cz.mendelu.pef.project.gamegian.database.LocalWorkoutRepository
 import cz.mendelu.pef.project.gamegian.model.Study
-import cz.mendelu.pef.project.gamegian.model.Workout
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

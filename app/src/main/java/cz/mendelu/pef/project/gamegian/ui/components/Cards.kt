@@ -38,7 +38,7 @@ fun StudyCard(study: Study, onDelete: (Any) -> Unit,navigationRouter: INavigatio
 
 
 @Composable
-fun WalkCard(walk: Walk, onDelete: (Any) -> Unit) {
+fun WalkCard(walk: Walk, onDelete: (Any) -> Unit, navigationRouter: INavigationRouter) {
     Row {
         Checkbox(checked = false, onCheckedChange = { /* TODO: Handle checkbox state */ })
 
@@ -47,7 +47,7 @@ fun WalkCard(walk: Walk, onDelete: (Any) -> Unit) {
             Text(text = walk.time.toReadableTime())
         }
 
-        IconButton(onClick = { /* TODO: Handle edit action */ }) {
+        IconButton(onClick = { navigationRouter.navigateToEditWalk(walk.id!!) }) {
             Icon(imageVector = Icons.Default.Create, contentDescription = null)
         }
 

@@ -31,7 +31,7 @@ fun ListScreen(navigationRouter: INavigationRouter) {
             items(combined) { item ->
                 when (item) {
                     is Study -> StudyCard(item, viewModel::deleteItem,navigationRouter)
-                    is Walk -> WalkCard(item, viewModel::deleteItem)
+                    is Walk -> WalkCard(item, viewModel::deleteItem,navigationRouter)
                     is Workout -> WorkoutCard(item, viewModel::deleteItem, navigationRouter)
                     else -> Text("Unsupported item type")
                 }

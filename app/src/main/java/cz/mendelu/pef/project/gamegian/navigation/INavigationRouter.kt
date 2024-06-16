@@ -15,5 +15,6 @@ interface INavigationRouter {
     fun navigateToListScreen()
     fun navigateToEditWorkout(id: Long)
     fun navigateToEditStudy(id: Long)
+    fun navigateToEditWalk(id: Long)
     fun returnBack()
 }

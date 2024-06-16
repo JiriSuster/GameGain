@@ -40,6 +40,10 @@ class NavigationRouterImpl(private val navController: NavController) : INavigati
         navController.navigate(Destination.EditStudy.route + "/" + id)
     }
 
+    override fun navigateToEditWalk(id: Long) {
+        navController.navigate(Destination.EditWalk.route + "/" + id)
+    }
+
     override fun returnBack() {
         navController.popBackStack()
     }

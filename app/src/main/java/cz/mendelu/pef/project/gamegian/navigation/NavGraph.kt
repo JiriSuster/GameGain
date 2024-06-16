@@ -8,10 +8,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import cz.mendelu.pef.project.gamegian.ui.EditWalkScreen
 import cz.mendelu.pef.project.gamegian.ui.screens.editWorkout.EditWorkout
 import cz.mendelu.pef.project.gamegian.ui.screens.addScreen.AddScreen
 import cz.mendelu.pef.project.gamegian.ui.screens.HomeScreen
-import cz.mendelu.pef.project.gamegian.ui.screens.editWorkout.EditStudyScreen
+import cz.mendelu.pef.project.gamegian.ui.screens.EditStudyScreen.EditStudyScreen
 import cz.mendelu.pef.project.gamegian.ui.screens.listScreen.ListScreen
 import cz.mendelu.pef.project.gamegian.ui.screens.firstScreen.FirstScreen
 import cz.mendelu.pef.project.gamegian.ui.screens.macroCalculator.MacroCalculator
@@ -75,6 +76,19 @@ fun NavGraph(
         {
             val id = it.arguments?.getLong("id")
             EditStudyScreen(navigationRouter = navigationRouter, id = id!!)
+        }
+
+
+        composable(Destination.EditWalk.route + "/{id}",
+            arguments = listOf(
+                navArgument("id") {
+                    type = NavType.LongType
+                    defaultValue = -1L
+                }
+            ))
+        {
+            val id = it.arguments?.getLong("id")
+            EditWalkScreen(navigationRouter = navigationRouter, id = id!!)
         }
 
 
