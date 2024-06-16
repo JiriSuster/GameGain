@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import cz.mendelu.pef.project.gamegian.MyDataStore
 import cz.mendelu.pef.project.gamegian.database.LocalStudyRepository
 import cz.mendelu.pef.project.gamegian.model.Study
 import cz.mendelu.pef.project.gamegian.utils.calculateTime
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditStudyViewModel @Inject constructor(
-    private val studyRepository: LocalStudyRepository
+    private val studyRepository: LocalStudyRepository,
+    private val myDataStore: MyDataStore
 ) : ViewModel() {
 
     var currentStudyId: Long = -1
@@ -27,12 +29,19 @@ class EditStudyViewModel @Inject constructor(
         }
     }
 
-    fun updateStudy(studyHours: Int, studyMins : Int) {
+    fun updateStudy(studyHours: Int, studyMins: Int) {
         currentStudy?.let { study ->
-            study.studyMinutes = studyMins
+            // Calculate old time before update
+            val oldTime = calculateTime(studyHours = study.studyHours, studyMinutes = study.studyMinutes)
+
+            // Update study with new data
             study.studyHours = studyHours
+            study.studyMinutes = studyMins
             study.time = calculateTime(studyHours = studyHours, studyMinutes = studyMins)
+
             viewModelScope.launch {
+                // Subtract old time and add new time to MyDataStore
+                myDataStore.appendTime(study.time - oldTime)
                 studyRepository.update(study)
             }
         }

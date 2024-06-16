@@ -66,7 +66,7 @@ class ListViewModel @Inject constructor(
                 }
                 is Workout -> {
                     val timeToSubtract = item.time ?: 0L
-                    myDataStore.updateTime(-timeToSubtract)
+                    myDataStore.appendTime(-timeToSubtract)
                     workoutRepository.delete(item)
                 }
                 else -> throw IllegalArgumentException("Unknown item type")

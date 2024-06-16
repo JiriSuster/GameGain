@@ -86,7 +86,7 @@ fun HomeScreen(
             )
 
             Text(
-                text = time?.toReadableTime() ?: "00:00:00",
+                text = time.toReadableTime(),
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold,
             )

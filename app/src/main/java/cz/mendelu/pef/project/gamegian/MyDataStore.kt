@@ -36,10 +36,14 @@ class MyDataStore(private val dataStore: DataStore<Preferences>) {
     }
 
     // Append method
-    suspend fun appendTime(newTime: Long) = dataStore.edit { preferences ->
-        val currentTime = preferences[PreferenceKeys.time] ?: 0L
-        preferences[PreferenceKeys.time] = currentTime + newTime
+    suspend fun appendTime(newTime: Long) {
+        dataStore.edit { preferences ->
+            val currentTime = preferences[PreferenceKeys.time] ?: 0L
+            val updatedTime = (currentTime + newTime).coerceAtLeast(0L)
+            preferences[PreferenceKeys.time] = updatedTime
+        }
     }
+
 
     // Watch methods
     fun watchGender(): Flow<Boolean> = dataStore.data.map { preferences ->
