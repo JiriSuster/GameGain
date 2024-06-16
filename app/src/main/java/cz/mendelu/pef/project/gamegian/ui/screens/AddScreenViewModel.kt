@@ -2,48 +2,64 @@ package cz.mendelu.pef.project.gamegian.ui.screens
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import cz.mendelu.pef.project.gamegian.database.LocalStudyRepository
+import cz.mendelu.pef.project.gamegian.database.LocalWalkRepository
+import cz.mendelu.pef.project.gamegian.database.LocalWorkoutRepository
+import cz.mendelu.pef.project.gamegian.model.Study
+import cz.mendelu.pef.project.gamegian.model.Walk
+import cz.mendelu.pef.project.gamegian.model.Workout
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AddScreenViewModel @Inject constructor(
-    //private val repository: ActivityRepository
+    private val walkRepository: LocalWalkRepository,
+    private val studyRepository: LocalStudyRepository,
+    private val workoutRepository: LocalWorkoutRepository
 ) : ViewModel() {
 
-    fun addWorkout(activity: String, reps: Int, sets: Int) {
-        val time = calculateTime(workoutReps = reps, workoutSets = sets)
+    var walking: Walk = Walk(0)
+    var studying: Study = Study(0)
+    var workouting: Workout = Workout(0)
+
+    fun addWorkout() {
+        val time = calculateTime(workoutReps = workouting.reps, workoutSets =  workouting.sets)
+        workouting.time = time
         viewModelScope.launch {
-            //repository.addWorkout(activity, reps, sets, time)
+            workoutRepository.insert(workouting)
         }
     }
 
-    fun addStudying(hours: Int, minutes: Int) {
-        val time = calculateTime(studyHours = hours, studyMinutes = minutes)
+    fun addStudying() {
+        val time = calculateTime(studyMinutes = studying.studyMinutes, studyHours = studying.studyHours)
+        studying.time = time
         viewModelScope.launch {
-            //repository.addStudying(hours, minutes, time)
+            studyRepository.insert(studying)
         }
     }
 
-    fun addWalking(distance: Float) {
-        val time = calculateTime(walkingSteps = distance.toInt())
+    fun addWalking() {
+        val time = calculateTime(walkingSteps = walking.steps)
+        walking.time = time
         viewModelScope.launch {
-            //repository.addWalking(distance, time)
+            walkRepository.insert(walking)
         }
     }
 
-    fun calculateTime(
+    private fun calculateTime(
         walkingSteps: Int = 0,
         workoutSets: Int = 0,
         workoutReps: Int = 0,
         studyHours: Int = 0,
         studyMinutes: Int = 0
-    ): Int {
-        val walkingReward = walkingSteps * 0.003 // 1 step = 0.003 minutes reward
-        val workoutReward = 5 * workoutSets  +  2 * workoutReps
-        val studyReward = (studyHours * 60 + studyMinutes) * 0.1667 // 1 hour = 10 minutes reward
+    ): Long {
+        val walkingRewardSeconds = walkingSteps * 0.18 // 1 step = 0.18 seconds reward
+        val workoutRewardSeconds = 5 * workoutSets  +  2 * workoutReps
+        val studyRewardSeconds = (studyHours * 3600 + studyMinutes * 60) * 0.1667 * 10 / 60 // 1 hour = 10 seconds reward
 
-        return (walkingReward + workoutReward + studyReward).toInt()
+
+        return (walkingRewardSeconds + workoutRewardSeconds + studyRewardSeconds).toLong()
     }
 
 

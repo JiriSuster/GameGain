@@ -16,15 +16,15 @@ import com.chillibits.composenumberpicker.VerticalNumberPicker
 @Composable
 fun AddScreen() {
     val viewModel = hiltViewModel<AddScreenViewModel>()
-    val (reps, setReps) = remember { mutableStateOf(0) }
-    val (sets, setSets) = remember { mutableStateOf(0) }
+    val (reps, setReps) = remember { mutableStateOf(viewModel.workouting.reps) }
+    val (sets, setSets) = remember { mutableStateOf(viewModel.workouting.sets) }
     val activityOptions = listOf("biceps curls", "push-ups", "sit-ups")
     val (activityExpanded, setActivityExpanded) = remember { mutableStateOf(false) }
     val (selectedActivity, setSelectedActivity) = remember { mutableStateOf(activityOptions[0]) }
 
     var sliderHoursPosition by remember { mutableStateOf(0f) }
     var sliderMinsPosition by remember { mutableStateOf(0f) }
-    var walkingDistance by remember { mutableStateOf("") }
+    var steps by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
@@ -81,7 +81,10 @@ fun AddScreen() {
                         horizontalArrangement = Arrangement.End
                     ) {
                         Button(onClick = {
-                            viewModel.addWorkout(selectedActivity, reps, sets)
+                            viewModel.workouting.exercise_name = selectedActivity
+                            viewModel.workouting.reps = reps
+                            viewModel.workouting.sets = sets
+                            viewModel.addWorkout()
                         }) {
                             Text(text = "+ Add")
                         }
@@ -148,7 +151,9 @@ fun AddScreen() {
                     .wrapContentSize(Alignment.Center)
             ) {
                 Button(onClick = {
-                    viewModel.addStudying(sliderHoursPosition.toInt(), sliderMinsPosition.toInt())
+                    viewModel.studying.studyHours = sliderHoursPosition.toInt()
+                    viewModel.studying.studyMinutes = sliderMinsPosition.toInt()
+                    viewModel.addStudying()
                 }) {
                     Text(text = "+ Add")
                 }
@@ -164,9 +169,9 @@ fun AddScreen() {
             )
 
             OutlinedTextField(
-                value = walkingDistance,
-                onValueChange = { walkingDistance = it },
-                label = { Text(text = "Distance (km)") },
+                value = steps,
+                onValueChange = { steps = it },
+                label = { Text(text = "steps") },
                 modifier = Modifier.fillMaxWidth()
             )
 
@@ -178,7 +183,8 @@ fun AddScreen() {
                     .wrapContentSize(Alignment.Center)
             ) {
                 Button(onClick = {
-                    viewModel.addWalking(walkingDistance.toFloat())
+                    viewModel.walking.steps = steps.toInt()
+                    viewModel.addWalking()
                 }) {
                     Text(text = "+ Add")
                 }
