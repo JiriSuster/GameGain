@@ -8,4 +8,5 @@ sealed class Destination(val route: String) {
     object MacroCalculator : Destination("macro_calculator")
     object FirstScreen : Destination("first_screen")
     object ListScreen : Destination("list_screen")
+    object EditWorkout : Destination("edit_workout")
 }

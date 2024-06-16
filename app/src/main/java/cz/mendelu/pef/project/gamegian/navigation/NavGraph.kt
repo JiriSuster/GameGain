@@ -3,12 +3,15 @@ package cz.mendelu.pef.project.gamegian.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import cz.mendelu.pef.project.gamegian.ui.screens.editWorkout.EditWorkout
 import cz.mendelu.pef.project.gamegian.ui.screens.addScreen.AddScreen
 import cz.mendelu.pef.project.gamegian.ui.screens.HomeScreen
-import cz.mendelu.pef.project.gamegian.ui.screens.ListScreen
+import cz.mendelu.pef.project.gamegian.ui.screens.listScreen.ListScreen
 import cz.mendelu.pef.project.gamegian.ui.screens.firstScreen.FirstScreen
 import cz.mendelu.pef.project.gamegian.ui.screens.macroCalculator.MacroCalculator
 import cz.mendelu.pef.project.gamegian.ui.screens.oneRepMax.OneRepMax
@@ -21,38 +24,47 @@ fun NavGraph(
         NavigationRouterImpl(navController = navHostController)
     },
     startDestination: String
-){
+) {
 
-    NavHost(navController = navHostController, startDestination = startDestination){
+    NavHost(navController = navHostController, startDestination = startDestination) {
 
-        composable(Destination.OneRepMax.route){
+        composable(Destination.OneRepMax.route) {
             OneRepMax()
         }
 
-        composable(Destination.HomeScreen.route){
+        composable(Destination.HomeScreen.route) {
             HomeScreen()
         }
 
-        composable(Destination.MacroCalculator.route){
+        composable(Destination.MacroCalculator.route) {
             MacroCalculator()
         }
 
-        composable(Destination.FirstScreen.route){
+        composable(Destination.FirstScreen.route) {
             FirstScreen()
         }
 
-        composable(Destination.AddTimeScreen.route){
+        composable(Destination.AddTimeScreen.route) {
             AddScreen(navigationRouter)
         }
 
-        composable(Destination.ListScreen.route){
+        composable(Destination.ListScreen.route) {
             ListScreen(navigationRouter = navigationRouter)
         }
 
-
+        composable(Destination.EditWorkout.route + "/{id}",
+            arguments = listOf(
+                navArgument("id") {
+                    type = NavType.LongType
+                    defaultValue = -1L
+                }
+            )) 
+        {
+            val id = it.arguments?.getLong("id")
+            EditWorkout(navigationRouter = navigationRouter, id = id!!)
+        }
 
 
     }
-
 
 }

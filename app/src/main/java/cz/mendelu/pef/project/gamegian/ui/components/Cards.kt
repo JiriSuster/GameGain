@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import cz.mendelu.pef.project.gamegian.model.Study
 import cz.mendelu.pef.project.gamegian.model.Walk
 import cz.mendelu.pef.project.gamegian.model.Workout
+import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 import cz.mendelu.pef.project.gamegian.toReadableTime
 
 @Composable
@@ -57,7 +58,7 @@ fun WalkCard(walk: Walk, onDelete: (Any) -> Unit) {
 }
 
 @Composable
-fun WorkoutCard(workout: Workout, onDelete: (Any) -> Unit) {
+fun WorkoutCard(workout: Workout, onDelete: (Any) -> Unit, navigationRouter: INavigationRouter) {
     Row {
         Checkbox(checked = false, onCheckedChange = { /* TODO: Handle checkbox state */ })
 
@@ -66,7 +67,7 @@ fun WorkoutCard(workout: Workout, onDelete: (Any) -> Unit) {
             Text(text = workout.time.toReadableTime())
         }
 
-        IconButton(onClick = { /* TODO: Handle edit action */ }) {
+        IconButton(onClick = { navigationRouter.navigateToEditWorkout(workout.id!!) }) {
             Icon(imageVector = Icons.Default.Create, contentDescription = null)
         }
 

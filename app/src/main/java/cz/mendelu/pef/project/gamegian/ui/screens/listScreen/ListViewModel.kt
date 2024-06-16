@@ -1,4 +1,4 @@
-package cz.mendelu.pef.project.gamegian.ui.screens
+package cz.mendelu.pef.project.gamegian.ui.screens.listScreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,8 +11,6 @@ import cz.mendelu.pef.project.gamegian.model.Workout
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,22 +26,29 @@ class ListViewModel @Inject constructor(
 
     fun loadAll() {
         viewModelScope.launch {
-            val studiesList = studyRepository.getAll().firstOrNull()?.sortedByDescending { it.date } ?: emptyList()
-            val walksList = walkingRepository.getAll().firstOrNull()?.sortedByDescending { it.date } ?: emptyList()
-            val workoutsList = workoutRepository.getAll().firstOrNull()?.sortedByDescending { it.date } ?: emptyList()
+            studyRepository.getAll().collect { studies ->
+                val studiesList = studies.sortedByDescending { it.date }
+                walkingRepository.getAll().collect { walks ->
+                    val walksList = walks.sortedByDescending { it.date }
+                    workoutRepository.getAll().collect { workouts ->
+                        val workoutsList = workouts.sortedByDescending { it.date }
 
-            val combinedList = (studiesList + walksList + workoutsList).sortedByDescending { item ->
-                when (item) {
-                    is Study -> item.date
-                    is Walk -> item.date
-                    is Workout -> item.date
-                    else -> throw IllegalArgumentException("Unknown type")
+                        val combinedList = (studiesList + walksList + workoutsList).sortedByDescending { item ->
+                            when (item) {
+                                is Study -> item.date
+                                is Walk -> item.date
+                                is Workout -> item.date
+                                else -> throw IllegalArgumentException("Unknown type")
+                            }
+                        }
+
+                        _combined.value = combinedList
+                    }
                 }
             }
-
-            _combined.value = combinedList
         }
     }
+
 
     fun deleteItem(item: Any) {
         viewModelScope.launch {

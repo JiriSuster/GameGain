@@ -17,4 +17,8 @@ class LocalStudyRepository @Inject constructor(private val dao: StudyDao) : ILoc
     override suspend fun delete(study: Study) {
         dao.delete(study)
     }
+
+    override suspend fun update(study: Study) {
+        dao.update(study)
+    }
 }

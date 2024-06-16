@@ -12,4 +12,8 @@ interface ILocalWorkoutRepository {
     suspend fun insert(workout: Workout): Long
 
     suspend fun delete(workout: Workout)
+
+    suspend fun update(workout: Workout)
+
+    suspend fun getWorkout(id: Long): Workout
 }

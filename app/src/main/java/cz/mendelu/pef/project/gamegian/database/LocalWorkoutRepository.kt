@@ -18,4 +18,12 @@ class LocalWorkoutRepository @Inject constructor(private val dao: WorkoutDao) : 
     override suspend fun delete(workout: Workout) {
         dao.delete(workout)
     }
+
+    override suspend fun update(workout: Workout) {
+        dao.update(workout)
+    }
+
+    override suspend fun getWorkout(id: Long): Workout {
+        return dao.getWorkout(id)
+    }
 }

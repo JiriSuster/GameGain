@@ -1,6 +1,7 @@
 package cz.mendelu.pef.project.gamegian.navigation
 
 import androidx.navigation.NavController
+import cz.mendelu.pef.project.gamegian.model.Workout
 
 class NavigationRouterImpl(private val navController: NavController) : INavigationRouter {
     override fun navigateToHomeScreen() {
@@ -31,7 +32,13 @@ class NavigationRouterImpl(private val navController: NavController) : INavigati
         navController.navigate(Destination.ListScreen.route)
     }
 
+    override fun navigateToEditWorkout(id: Long) {
+    navController.navigate(Destination.EditWorkout.route + "/" + id)
+    }
+
     override fun returnBack() {
         navController.popBackStack()
     }
+
+
 }

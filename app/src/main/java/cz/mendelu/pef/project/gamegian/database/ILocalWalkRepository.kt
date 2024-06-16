@@ -10,4 +10,6 @@ interface ILocalWalkRepository {
     suspend fun insert(walk: Walk): Long
 
     suspend fun delete(walk: Walk)
+
+    suspend fun update(walk: Walk)
 }

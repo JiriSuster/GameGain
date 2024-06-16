@@ -17,4 +17,8 @@ class LocalWalkRepository @Inject constructor(private val dao: WalkDao) : ILocal
     override suspend fun delete(walk: Walk) {
         dao.delete(walk)
     }
+
+    override suspend fun update(walk: Walk) {
+        dao.update(walk)
+    }
 }
