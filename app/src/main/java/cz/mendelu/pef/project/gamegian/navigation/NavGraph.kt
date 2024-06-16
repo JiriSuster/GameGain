@@ -35,7 +35,7 @@ fun NavGraph(
         }
 
         composable(Destination.HomeScreen.route) {
-            HomeScreen()
+            HomeScreen(navigationRouter)
         }
 
         composable(Destination.MacroCalculator.route) {
@@ -43,7 +43,7 @@ fun NavGraph(
         }
 
         composable(Destination.FirstScreen.route) {
-            FirstScreen()
+            FirstScreen(navigationRouter)
         }
 
         composable(Destination.AddTimeScreen.route) {

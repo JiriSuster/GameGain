@@ -14,7 +14,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             GameGainTheme {
-                NavGraph(startDestination = Destination.AddTimeScreen.route)
+                NavGraph(startDestination = Destination.FirstScreen.route)
             }
         }
     }

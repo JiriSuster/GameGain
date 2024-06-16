@@ -20,6 +20,8 @@ hilt-compose = "1.1.0"
 moshi = "1.15.0"
 lifecycle = "2.7.0"
 
+androidx_datastore_preferences_core = "1.1.1"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -59,6 +61,9 @@ hilt-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", vers
 moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
 moshi-kapt = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
 lifecycle = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
+
+androidx_datastore_preferences_core = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "androidx_datastore_preferences_core" }
+
 
 
 [plugins]

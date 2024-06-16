@@ -15,7 +15,7 @@ android {
         minSdk = 26
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -86,4 +86,7 @@ dependencies {
     implementation(libs.moshi)
     kapt(libs.moshi.kapt)
     implementation(libs.lifecycle)
+    implementation(libs.androidx.datastore.preferences.core)
+
+
 }

@@ -1,6 +1,8 @@
 package cz.mendelu.pef.project.gamegian.ui.screens.addScreen
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -31,13 +33,19 @@ fun AddScreen(navigationRouter: INavigationRouter) {
     Scaffold(
         topBar = {
             TopAppBar(
+                navigationIcon = {
+                    IconButton(onClick = {
+                        navigationRouter.returnBack()
+                    }) {
+                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "")
+                    }
+                },
                 title = {
                     Box(modifier = Modifier.fillMaxWidth()) {
                         Text(
-                            text = "Add Time",
+                            text = "add time",
                             modifier = Modifier.align(Alignment.Center),
-                            fontSize = 18.sp,
-                            textAlign = TextAlign.Center
+                            fontSize = 14.sp
                         )
                     }
                 }
