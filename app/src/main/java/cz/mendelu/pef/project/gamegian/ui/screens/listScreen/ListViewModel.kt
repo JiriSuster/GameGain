@@ -8,6 +8,7 @@ import cz.mendelu.pef.project.gamegian.database.ILocalWorkoutRepository
 import cz.mendelu.pef.project.gamegian.model.Study
 import cz.mendelu.pef.project.gamegian.model.Walk
 import cz.mendelu.pef.project.gamegian.model.Workout
+import cz.mendelu.pef.project.gamegian.MyDataStore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,7 +19,8 @@ import javax.inject.Inject
 class ListViewModel @Inject constructor(
     private val studyRepository: ILocalStudyRepository,
     private val workoutRepository: ILocalWorkoutRepository,
-    private val walkingRepository: ILocalWalkRepository
+    private val walkingRepository: ILocalWalkRepository,
+    private val myDataStore: MyDataStore
 ) : ViewModel() {
 
     private val _combined = MutableStateFlow<List<Any>>(emptyList())
@@ -49,17 +51,22 @@ class ListViewModel @Inject constructor(
         }
     }
 
-
     fun deleteItem(item: Any) {
         viewModelScope.launch {
             when (item) {
                 is Study -> {
+                    val timeToSubtract = item.time ?: 0L
+                    myDataStore.appendTime(-timeToSubtract)
                     studyRepository.delete(item)
                 }
                 is Walk -> {
+                    val timeToSubtract = item.time ?: 0L
+                    myDataStore.appendTime(-timeToSubtract)
                     walkingRepository.delete(item)
                 }
                 is Workout -> {
+                    val timeToSubtract = item.time ?: 0L
+                    myDataStore.updateTime(-timeToSubtract)
                     workoutRepository.delete(item)
                 }
                 else -> throw IllegalArgumentException("Unknown item type")
