@@ -19,7 +19,7 @@ import cz.mendelu.pef.project.gamegian.toReadableTime
 @Composable
 fun StudyCard(study: Study, onDelete: (Any) -> Unit,navigationRouter: INavigationRouter) {
     Row {
-        Checkbox(checked = false, onCheckedChange = {  })
+       // Checkbox(checked = false, onCheckedChange = {  })
 
         Column {
             Text(text = "studying ${study.studyHours}h ${study.studyMinutes}m")
@@ -40,7 +40,7 @@ fun StudyCard(study: Study, onDelete: (Any) -> Unit,navigationRouter: INavigatio
 @Composable
 fun WalkCard(walk: Walk, onDelete: (Any) -> Unit, navigationRouter: INavigationRouter) {
     Row {
-        Checkbox(checked = false, onCheckedChange = { /* TODO: Handle checkbox state */ })
+        //Checkbox(checked = false, onCheckedChange = { /* TODO: Handle checkbox state */ })
 
         Column {
             Text(text = "${walk.steps} steps")
@@ -60,7 +60,7 @@ fun WalkCard(walk: Walk, onDelete: (Any) -> Unit, navigationRouter: INavigationR
 @Composable
 fun WorkoutCard(workout: Workout, onDelete: (Any) -> Unit, navigationRouter: INavigationRouter) {
     Row {
-        Checkbox(checked = false, onCheckedChange = { /* TODO: Handle checkbox state */ })
+        //Checkbox(checked = false, onCheckedChange = { /* TODO: Handle checkbox state */ })
 
         Column {
             Text(text = "${workout.exercise_name} ${workout.reps}x${workout.sets}")
