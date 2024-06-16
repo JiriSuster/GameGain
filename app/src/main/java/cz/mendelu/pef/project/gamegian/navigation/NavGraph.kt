@@ -1,5 +1,6 @@
 package cz.mendelu.pef.project.gamegian.navigation
 
+import LeaderBoardScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
@@ -90,6 +91,11 @@ fun NavGraph(
             val id = it.arguments?.getLong("id")
             EditWalkScreen(navigationRouter = navigationRouter, id = id!!)
         }
+
+        composable(Destination.Leaderboard.route) {
+            LeaderBoardScreen(navigationRouter = navigationRouter)
+        }
+
 
 
     }

@@ -11,10 +11,11 @@ interface INavigationRouter {
     fun navigateToOneRepMax()
     fun navigateToMacroCalculator()
     fun navigateToAddScreen()
-    //fun navigateToLeaderBoard()
+    fun navigateToLeaderBoard()
     fun navigateToListScreen()
     fun navigateToEditWorkout(id: Long)
     fun navigateToEditStudy(id: Long)
     fun navigateToEditWalk(id: Long)
+
     fun returnBack()
 }

@@ -71,6 +71,10 @@ fun HomeScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            
+            Button(onClick = { navigationRouter.navigateToLeaderBoard() }) {
+                Text(text = "leaderboard")
+            }
             Button(onClick = {navigationRouter.navigateToMacroCalculator()}) {
                 Text(text = "macro calculator")
 

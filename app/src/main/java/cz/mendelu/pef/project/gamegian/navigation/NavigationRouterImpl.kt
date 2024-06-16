@@ -28,6 +28,10 @@ class NavigationRouterImpl(private val navController: NavController) : INavigati
         navController.navigate(Destination.AddTimeScreen.route)
     }
 
+    override fun navigateToLeaderBoard() {
+        navController.navigate(Destination.Leaderboard.route)
+    }
+
     override fun navigateToListScreen() {
         navController.navigate(Destination.ListScreen.route)
     }
@@ -43,6 +47,7 @@ class NavigationRouterImpl(private val navController: NavController) : INavigati
     override fun navigateToEditWalk(id: Long) {
         navController.navigate(Destination.EditWalk.route + "/" + id)
     }
+
 
     override fun returnBack() {
         navController.popBackStack()
