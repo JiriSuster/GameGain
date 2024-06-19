@@ -22,17 +22,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import cz.mendelu.pef.project.gamegian.R
 import cz.mendelu.pef.project.gamegian.ui.screens.addScreen.AddScreenViewModel
-import cz.mendelu.pef.project.gamegian.utils.LeaderBoardService
-
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     navigationRouter: INavigationRouter,
-    viewModel: AddScreenViewModel = hiltViewModel()
 ) {
-    val myDataStore = viewModel.myDataStore
+    val homeScreenViewModel = hiltViewModel<HomeScreenViewModel>()
+    val myDataStore = homeScreenViewModel.myDataStore
     val context = LocalContext.current
     val packageInfo = remember {
         context.packageManager.getPackageInfo(context.packageName, 0)
@@ -44,11 +42,9 @@ fun HomeScreen(
     }
 
     val username = usernameState ?: ""
-    val timeState by produceState<Long?>(initialValue = null) {
-        value = myDataStore.watchTime().first()
-    }
+    val remainingTime by homeScreenViewModel::remainingTime
+    val isTimerRunning by homeScreenViewModel::isTimerRunning
 
-    val time = timeState ?: 0L
     Scaffold(
         topBar = {
             TopAppBar(
@@ -96,7 +92,7 @@ fun HomeScreen(
             )
 
             Text(
-                text = time.toReadableTime(),
+                text = remainingTime.toReadableTime(),
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold,
             )
@@ -104,7 +100,7 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(
-                onClick = { /* start timer logic */ },
+                onClick = { homeScreenViewModel.toggleTimer() },
                 modifier = Modifier
                     .height(65.dp)
                     .width(200.dp)
@@ -114,7 +110,7 @@ fun HomeScreen(
                     contentColor = Color(0xFF7E57C2)
                 )
             ) {
-                Text(text = stringResource(id = R.string.start_timer_button))
+                Text(text = stringResource(id = if (isTimerRunning) R.string.stop_timer_button else R.string.start_timer_button))
             }
 
             Spacer(modifier = Modifier.height(32.dp))

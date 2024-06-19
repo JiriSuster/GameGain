@@ -21,7 +21,7 @@ class LeaderBoardViewModel @Inject constructor(
         viewModelScope.launch {
             dataStore.watchTime().collect { time ->
                 val username = dataStore.watchUsername().firstOrNull() ?: "unknown"
-                if (time != null) {
+                if (time != null && username != "Guest") {
                     submitScore(username, time.toInt())
                 }
             }
