@@ -9,6 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import cz.mendelu.pef.project.gamegian.navigation.Destination
 import cz.mendelu.pef.project.gamegian.navigation.NavGraph
 import cz.mendelu.pef.project.gamegian.ui.theme.GameGainTheme
