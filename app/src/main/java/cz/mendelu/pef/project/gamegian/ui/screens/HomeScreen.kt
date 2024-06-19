@@ -21,14 +21,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import cz.mendelu.pef.project.gamegian.R
-import cz.mendelu.pef.project.gamegian.ui.screens.addScreen.AddScreenViewModel
+import cz.mendelu.pef.project.gamegian.navigation.bottomNavItems
+import cz.mendelu.pef.project.gamegian.ui.components.BottomNavigationBar
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    navigationRouter: INavigationRouter,
+    navigationRouter: INavigationRouter
 ) {
+
+
     val homeScreenViewModel = hiltViewModel<HomeScreenViewModel>()
     val myDataStore = homeScreenViewModel.myDataStore
     val context = LocalContext.current
@@ -46,6 +49,9 @@ fun HomeScreen(
     val isTimerRunning by homeScreenViewModel::isTimerRunning
 
     Scaffold(
+        bottomBar = {
+            BottomNavigationBar(navigationRouter = navigationRouter, items = bottomNavItems)
+        },
         topBar = {
             TopAppBar(
                 title = {
@@ -67,16 +73,7 @@ fun HomeScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
-            Button(onClick = { navigationRouter.navigateToLeaderBoard() }) {
-                Text(text = stringResource(id = R.string.leaderboard_button))
-            }
-            Button(onClick = {navigationRouter.navigateToMacroCalculator()}) {
-                Text(text = stringResource(id = R.string.macro_calculator_button))
-            }
-            Button(onClick = {navigationRouter.navigateToOneRepMax()}) {
-                Text(text = stringResource(id = R.string.one_rep_max_button))
-            }
+            
             Text(text = appVersion)
             Text(
                 text = stringResource(id = if (username.isNotEmpty()) R.string.welcome_message else R.string.guest_welcome_message, username),
@@ -131,13 +128,6 @@ fun HomeScreen(
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(text = stringResource(id = R.string.add_time_button), color = Color.White)
-                }
-                Button(
-                    onClick = { navigationRouter.navigateToListScreen() },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF6750A4)),
-                    modifier = Modifier.padding(8.dp)
-                ) {
-                    Text(text = stringResource(id = R.string.activities_button), color = Color.White)
                 }
             }
         }

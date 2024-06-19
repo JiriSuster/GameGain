@@ -17,6 +17,8 @@ import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 import cz.mendelu.pef.project.gamegian.ui.components.DonutWithText
 import com.chillibits.composenumberpicker.HorizontalNumberPicker
 import cz.mendelu.pef.project.gamegian.R
+import cz.mendelu.pef.project.gamegian.navigation.bottomNavItems
+import cz.mendelu.pef.project.gamegian.ui.components.BottomNavigationBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -28,6 +30,9 @@ fun OneRepMax(navigationRouter: INavigationRouter) {
     var percentages by remember { mutableStateOf(viewModel.percentages) }
 
     Scaffold(
+        bottomBar = {
+            BottomNavigationBar(navigationRouter = navigationRouter, items = bottomNavItems)
+        },
         topBar = {
             TopAppBar(
                 title = {

@@ -7,8 +7,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -29,6 +33,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 import cz.mendelu.pef.project.gamegian.R
+import cz.mendelu.pef.project.gamegian.navigation.bottomNavItems
+import cz.mendelu.pef.project.gamegian.ui.components.BottomNavigationBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,8 +55,18 @@ fun EditWalkScreen(navigationRouter: INavigationRouter, id: Long) {
     }
 
     Scaffold(
+        bottomBar = {
+            BottomNavigationBar(navigationRouter = navigationRouter, items = bottomNavItems)
+        },
         topBar = {
             TopAppBar(
+                navigationIcon = {
+                    IconButton(onClick = {
+                        navigationRouter.returnBack()
+                    }) {
+                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = stringResource(R.string.back_button_content_description))
+                    }
+                },
                 title = {
                     Box(modifier = Modifier.fillMaxWidth()) {
                         Text(

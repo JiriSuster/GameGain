@@ -21,7 +21,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 import cz.mendelu.pef.project.gamegian.R
+import cz.mendelu.pef.project.gamegian.navigation.bottomNavItems
 import cz.mendelu.pef.project.gamegian.toReadableTime
+import cz.mendelu.pef.project.gamegian.ui.components.BottomNavigationBar
 import cz.mendelu.pef.project.gamegian.ui.screens.LeaderBoardViewModel
 import cz.mendelu.pef.project.gamegian.ui.screens.oneRepMax.OneRepMaxViewModel
 
@@ -36,6 +38,9 @@ fun LeaderBoardScreen(navigationRouter: INavigationRouter) {
     val scoresState = viewModel.getScores()
     val scores = scoresState.value
     Scaffold(
+        bottomBar = {
+            BottomNavigationBar(navigationRouter = navigationRouter, items = bottomNavItems)
+        },
         topBar = {
             TopAppBar(
                 navigationIcon = {

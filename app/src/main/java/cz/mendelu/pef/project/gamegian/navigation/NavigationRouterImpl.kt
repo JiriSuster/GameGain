@@ -48,6 +48,16 @@ class NavigationRouterImpl(private val navController: NavController) : INavigati
         navController.navigate(Destination.EditWalk.route + "/" + id)
     }
 
+    override fun navigateTo(route: String) {
+        navController.navigate(route) {
+            popUpTo(navController.graph.startDestinationRoute!!) {
+                saveState = true
+            }
+            launchSingleTop = true
+            restoreState = true
+        }
+    }
+
 
     override fun returnBack() {
         navController.popBackStack()

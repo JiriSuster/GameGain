@@ -41,9 +41,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
-// Updated imports
 import androidx.compose.ui.res.stringResource
 import cz.mendelu.pef.project.gamegian.R
+import cz.mendelu.pef.project.gamegian.navigation.bottomNavItems
+import cz.mendelu.pef.project.gamegian.ui.components.BottomNavigationBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -76,6 +77,9 @@ fun MacroCalculator(navigationRouter: INavigationRouter){
     val (result, setResult) = remember { mutableStateOf<MacroResult?>(null) }
 
     Scaffold(
+        bottomBar = {
+            BottomNavigationBar(navigationRouter = navigationRouter, items = bottomNavItems)
+        },
         topBar = {
             TopAppBar(
                 title = {

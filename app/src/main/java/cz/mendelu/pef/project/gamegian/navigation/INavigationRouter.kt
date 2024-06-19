@@ -16,6 +16,6 @@ interface INavigationRouter {
     fun navigateToEditWorkout(id: Long)
     fun navigateToEditStudy(id: Long)
     fun navigateToEditWalk(id: Long)
-
+    fun navigateTo(route: String)
     fun returnBack()
 }
