@@ -9,6 +9,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
+
 class MyDataStore(private val dataStore: DataStore<Preferences>) {
 
     private object PreferenceKeys {
@@ -43,7 +44,6 @@ class MyDataStore(private val dataStore: DataStore<Preferences>) {
             preferences[PreferenceKeys.time] = updatedTime
         }
     }
-
 
     // Watch methods
     fun watchGender(): Flow<Boolean> = dataStore.data.map { preferences ->

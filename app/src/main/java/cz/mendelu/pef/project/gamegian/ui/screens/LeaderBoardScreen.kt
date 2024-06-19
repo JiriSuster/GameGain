@@ -17,41 +17,25 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 import cz.mendelu.pef.project.gamegian.R
+import cz.mendelu.pef.project.gamegian.toReadableTime
+import cz.mendelu.pef.project.gamegian.ui.screens.LeaderBoardViewModel
+import cz.mendelu.pef.project.gamegian.ui.screens.oneRepMax.OneRepMaxViewModel
 
-@Composable
-fun PlayerItem(username: String, score: Int) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-            .background(color = Color(0xFFF4EDFF)),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(text = stringResource(id = R.string.username_label))
-            Text(text = username)
-            Text(text = stringResource(id = R.string.score_label))
-            Text(text = score.toString())
-        }
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LeaderBoardScreen(navigationRouter: INavigationRouter) {
-    val viewModel: LeaderBoardViewModel = viewModel()
+    val viewModel = hiltViewModel<LeaderBoardViewModel>()
 
     viewModel.fetchScores()
 
     val scoresState = viewModel.getScores()
     val scores = scoresState.value
     Scaffold(
-
         topBar = {
             TopAppBar(
                 navigationIcon = {
@@ -72,7 +56,6 @@ fun LeaderBoardScreen(navigationRouter: INavigationRouter) {
                 }
             )
         }
-
     ) {
         LazyColumn(
             modifier = Modifier.padding(it)
@@ -85,5 +68,24 @@ fun LeaderBoardScreen(navigationRouter: INavigationRouter) {
             }
         }
     }
+}
 
+@Composable
+fun PlayerItem(username: String, score: Int) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+            .background(color = Color(0xFFF4EDFF)),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = stringResource(id = R.string.username_label))
+            Text(text = username)
+            Text(text = stringResource(id = R.string.score_label))
+            Text(text = score.toLong().toReadableTime())
+        }
+    }
 }

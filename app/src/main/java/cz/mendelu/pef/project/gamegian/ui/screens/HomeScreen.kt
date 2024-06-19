@@ -14,7 +14,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import cz.mendelu.pef.project.gamegian.MyDataStore
 import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 import cz.mendelu.pef.project.gamegian.toReadableTime
 import kotlinx.coroutines.flow.first
@@ -23,7 +22,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import cz.mendelu.pef.project.gamegian.R
 import cz.mendelu.pef.project.gamegian.ui.screens.addScreen.AddScreenViewModel
-import java.util.*
+import cz.mendelu.pef.project.gamegian.utils.LeaderBoardService
+
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -32,26 +33,22 @@ fun HomeScreen(
     viewModel: AddScreenViewModel = hiltViewModel()
 ) {
     val myDataStore = viewModel.myDataStore
-
-    // Fetch the app version using PackageManager
     val context = LocalContext.current
     val packageInfo = remember {
         context.packageManager.getPackageInfo(context.packageName, 0)
     }
-    val appVersion = packageInfo.versionName
 
-    // Observe the username
+    val appVersion = packageInfo.versionName
     val usernameState by produceState<String?>(initialValue = null) {
         value = myDataStore.watchUsername().first()
     }
-    val username = usernameState ?: ""
 
-    // Observe the time
+    val username = usernameState ?: ""
     val timeState by produceState<Long?>(initialValue = null) {
         value = myDataStore.watchTime().first()
     }
-    val time = timeState ?: 0L
 
+    val time = timeState ?: 0L
     Scaffold(
         topBar = {
             TopAppBar(
@@ -80,11 +77,9 @@ fun HomeScreen(
             }
             Button(onClick = {navigationRouter.navigateToMacroCalculator()}) {
                 Text(text = stringResource(id = R.string.macro_calculator_button))
-
             }
             Button(onClick = {navigationRouter.navigateToOneRepMax()}) {
                 Text(text = stringResource(id = R.string.one_rep_max_button))
-
             }
             Text(text = appVersion)
             Text(

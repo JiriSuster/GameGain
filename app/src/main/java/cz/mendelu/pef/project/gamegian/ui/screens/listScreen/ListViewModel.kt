@@ -28,14 +28,18 @@ class ListViewModel @Inject constructor(
 
     fun loadAll() {
         viewModelScope.launch {
-            studyRepository.getAll().collect { studies ->
-                val studiesList = studies.sortedByDescending { it.date }
-                walkingRepository.getAll().collect { walks ->
-                    val walksList = walks.sortedByDescending { it.date }
-                    workoutRepository.getAll().collect { workouts ->
-                        val workoutsList = workouts.sortedByDescending { it.date }
+            val studies = studyRepository.getAll()
+            val walks = walkingRepository.getAll()
+            val workouts = workoutRepository.getAll()
 
-                        val combinedList = (studiesList + walksList + workoutsList).sortedByDescending { item ->
+            studies.collect { studiesList ->
+                val sortedStudies = studiesList.sortedByDescending { it.date }
+                walks.collect { walksList ->
+                    val sortedWalks = walksList.sortedByDescending { it.date }
+                    workouts.collect { workoutsList ->
+                        val sortedWorkouts = workoutsList.sortedByDescending { it.date }
+
+                        val combinedList = (sortedStudies + sortedWalks + sortedWorkouts).sortedByDescending { item ->
                             when (item) {
                                 is Study -> item.date
                                 is Walk -> item.date
@@ -45,6 +49,10 @@ class ListViewModel @Inject constructor(
                         }
 
                         _combined.value = combinedList
+
+                        if (combinedList.isEmpty()) {
+                            myDataStore.updateTime(0)
+                        }
                     }
                 }
             }

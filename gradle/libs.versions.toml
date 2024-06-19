@@ -21,6 +21,7 @@ moshi = "1.15.0"
 lifecycle = "2.7.0"
 
 androidx_datastore_preferences_core = "1.1.1"
+firebaseFirestore = "25.0.0"
 
 
 [libraries]
@@ -63,6 +64,7 @@ moshi-kapt = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", vers
 lifecycle = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
 
 androidx_datastore_preferences_core = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "androidx_datastore_preferences_core" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 
 
 
