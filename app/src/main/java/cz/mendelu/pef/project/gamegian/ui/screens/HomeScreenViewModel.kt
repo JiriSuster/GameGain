@@ -50,7 +50,7 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 
-    private fun stopTimer() {
+    fun stopTimer() {
         isTimerRunning = false
         viewModelScope.launch {
             myDataStore.updateTime(remainingTime)

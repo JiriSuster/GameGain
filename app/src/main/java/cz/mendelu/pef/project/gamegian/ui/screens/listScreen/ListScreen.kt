@@ -2,13 +2,19 @@ package cz.mendelu.pef.project.gamegian.ui.screens.listScreen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -23,6 +29,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cz.mendelu.pef.project.gamegian.model.Study
 import cz.mendelu.pef.project.gamegian.model.Walk
@@ -87,12 +95,28 @@ fun ListScreen(navigationRouter: INavigationRouter) {
                             is Study -> StudyCard(item, viewModel::deleteItem, navigationRouter)
                             is Walk -> WalkCard(item, viewModel::deleteItem, navigationRouter)
                             is Workout -> WorkoutCard(item, viewModel::deleteItem, navigationRouter)
-                            else -> Text("Unsupported item type")
+                            else -> Text(stringResource(id = R.string.no_activities_message))
                         }
                     }
                 }
             } else {
-                Text(text = stringResource(id = R.string.add_first_activity))
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(text = stringResource(id = R.string.no_activities_message), style = TextStyle(fontSize = 25.sp), modifier = Modifier.align(Alignment.CenterHorizontally))
+                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.BottomEnd) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = stringResource(id = R.string.add_new_activity),
+                            style = TextStyle(fontSize = 25.sp)
+                        )
+                        Icon(
+                            imageVector = Icons.Default.ArrowForward,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .padding(end = 80.dp)
+                                .size(100.dp)
+                        )
+                    }
+                }
             }
         }
     }

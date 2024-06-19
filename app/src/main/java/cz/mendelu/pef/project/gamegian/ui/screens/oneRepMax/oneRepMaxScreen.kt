@@ -102,7 +102,8 @@ fun OneRepMax(navigationRouter: INavigationRouter) {
                 items(percentages) { (percentage, weight) ->
                     DonutWithText(
                         percentage = percentage,
-                        text = "${percentage * 100}%\n" + "%.2f KG".format(weight)
+                        text = "${"%.2f".format(percentage * 100)}%\n${"%.2f".format(weight)} KG"
+
                     )
                 }
             }

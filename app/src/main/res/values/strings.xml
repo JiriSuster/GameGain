@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MacroCalculator</string>
+    <string name="app_name">GameGain</string>
     <string name="macro_calculator">macro calculator</string>
     <string name="activity">activity:</string>
     <string name="goal">goal:</string>
@@ -52,7 +52,6 @@
     <string name="join_button_text">Join leaderboard \uD83D\uDE0A</string>
     <string name="proceed_button_text">Proceed without joining \uD83D\uDE1E</string>
 
-    <string name="activities_title">Activities</string>
     <string name="add_first_activity">Add your first activity</string>
 
     <string name="one_rep_max_title">One Rep Max</string>
@@ -75,6 +74,16 @@
     <string name="username_label">Username:</string>
     <string name="score_label">Score:</string>
     <string name="leaderboard_title">leaderboard</string>
+
+    <string name="activities_title">Activities</string>
+    <string name="no_activities_message">No activities yet \uD83D\uDE13</string>
+    <string name="add_new_activity">Add new activity</string>
+
+    <string name="bottom_nav_1rm">1RM</string>
+    <string name="bottom_nav_macro">Macro</string>
+    <string name="bottom_nav_timer">Timer</string>
+    <string name="bottom_nav_list">List</string>
+    <string name="bottom_nav_board">Board</string>
 
 
 </resources>

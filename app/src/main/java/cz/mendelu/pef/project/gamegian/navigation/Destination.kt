@@ -9,10 +9,10 @@ import cz.mendelu.pef.project.gamegian.ui.components.BottomNavItem
 
 val bottomNavItems = listOf(
     BottomNavItem("1RM", Destination.OneRepMax.route, Icons.Default.KeyboardArrowUp),
-    BottomNavItem("macro", Destination.MacroCalculator.route, Icons.Default.KeyboardArrowUp),
-    BottomNavItem("timer", Destination.HomeScreen.route, Icons.Default.KeyboardArrowUp),
-    BottomNavItem("board", Destination.Leaderboard.route, Icons.Default.KeyboardArrowUp),
-    BottomNavItem("List", Destination.ListScreen.route, Icons.Default.KeyboardArrowUp)
+    BottomNavItem("Macro", Destination.MacroCalculator.route, Icons.Default.KeyboardArrowUp),
+    BottomNavItem("Timer", Destination.HomeScreen.route, Icons.Default.KeyboardArrowUp),
+    BottomNavItem("List", Destination.ListScreen.route, Icons.Default.KeyboardArrowUp),
+    BottomNavItem("Board", Destination.Leaderboard.route, Icons.Default.KeyboardArrowUp)
 )
 sealed class Destination(val route: String) {
     object HomeScreen : Destination("home_screen")

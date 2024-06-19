@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name">GameGain</string>
+    <string name="macro_calculator">makrokalkulačka</string>
+    <string name="activity">aktivita:</string>
+    <string name="goal">cíl:</string>
+    <string name="age">Věk</string>
+    <string name="weight">Hmotnost</string>
+    <string name="height">Výška</string>
+    <string name="calculate">vypočítat</string>
+    <string name="your_daily_intake">Váš denní příjem:</string>
+    <string name="protein">Bílkoviny:</string>
+    <string name="carbs">Sacharidy:</string>
+    <string name="fat">Tuky:</string>
+    <string name="sedentary">sedavý</string>
+    <string name="lightly_active">mírně aktivní</string>
+    <string name="moderately_active">středně aktivní</string>
+    <string name="very_active">velmi aktivní</string>
+    <string name="extra_active">extra aktivní</string>
+    <string name="gain_muscle">nabrat svaly</string>
+    <string name="maintain_weight">udržet váhu</string>
+    <string name="lose_body_fat">ztratit tělesný tuk</string>
+    <string name="back_button_content_description">Zpět</string>
+    <string name="add_time_title">Přidat čas</string>
+    <string name="workouts_label">Tréninky:</string>
+    <string name="add_button_text">+ Přidat</string>
+    <string name="reps_label">Opakování</string>
+    <string name="sets_label">Série</string>
+    <string name="studying_label">Studium</string>
+    <string name="hours_label">Hodiny</string>
+    <string name="minutes_label">Minuty</string>
+    <string name="walking_label">Chůze</string>
+    <string name="steps_label">kroky</string>
+    <string name="activity_biceps_curls">bicepsové zdvihy</string>
+    <string name="activity_push_ups">kliků</string>
+    <string name="activity_sit_ups">sedů-lehů</string>
+    <string name="activity_pull_ups">shybů</string>
+    <string name="activity_dips">tricepsových kliků</string>
+
+    <string name="edit_study_title">Upravit studium</string>
+    <string name="edit_button_text">Upravit</string>
+
+    <string name="edit_walk_title">Upravit chůzi</string>
+
+    <string name="edit_workout_title">Upravit trénink</string>
+    <string name="save_button_text">Uložit</string>
+
+    <string name="join_leaderboard_title">Připojte se k žebříčku!</string>
+    <string name="join_leaderboard_description">Pomozte nám zlepšit vaše zkušenosti tím, že poskytnete několik údajů. To vám umožní připojit se k našemu žebříčku a získat přesnější výpočty.</string>
+    <string name="username_hint">Uživatelské jméno</string>
+    <string name="male_label">Muž</string>
+    <string name="female_label">Žena</string>
+    <string name="join_button_text">Připojit se k žebříčku \uD83D\uDE0A</string>
+    <string name="proceed_button_text">Pokračovat bez připojení \uD83D\uDE1E</string>
+
+    <string name="activities_title">Aktivity</string>
+    <string name="add_first_activity">Přidat první aktivitu</string>
+
+    <string name="one_rep_max_title">Maximální váha na 1 opakování</string>
+    <string name="your_one_rep_max">Vaše maximální váha na 1 opakování:</string>
+    <string name="calculate_button">Vypočítat</string>
+    <string name="weight_label">Hmotnost</string>
+
+    <string name="timer_title">Časovač</string>
+    <string name="leaderboard_button">Žebříček</string>
+    <string name="macro_calculator_button">Makrokalkulačka</string>
+    <string name="one_rep_max_button">Jedno opakování max</string>
+    <string name="welcome_message">Vítejte, %s!</string>
+    <string name="guest_welcome_message">Vítejte, Hoste!</string>
+    <string name="play_for">Můžete hrát:</string>
+    <string name="start_timer_button">Spustit časovač</string>
+    <string name="stop_timer_button">Zastavit časovač</string>
+    <string name="add_time_button">Přidat čas</string>
+    <string name="activities_button">Aktivity</string>
+
+    <string name="username_label">Uživatelské jméno:</string>
+    <string name="score_label">Skóre:</string>
+    <string name="leaderboard_title">Žebříček</string>
+
+    <string name="no_activities_message">Zatím žádné aktivity \uD83D\uDE13</string>
+    <string name="add_new_activity">Přidejte novou aktivitu</string>
+
+    <string name="bottom_nav_1rm">1RM</string>
+    <string name="bottom_nav_macro">Makra</string>
+    <string name="bottom_nav_timer">Časovač</string>
+    <string name="bottom_nav_list">Seznam</string>
+    <string name="bottom_nav_board">Žebříček</string>
+</resources>

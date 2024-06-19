@@ -87,6 +87,7 @@ dependencies {
     kapt(libs.moshi.kapt)
     implementation(libs.lifecycle)
     implementation(libs.androidx.datastore.preferences.core)
+    implementation("androidx.core:core-splashscreen:1.0.1")
 
 
 

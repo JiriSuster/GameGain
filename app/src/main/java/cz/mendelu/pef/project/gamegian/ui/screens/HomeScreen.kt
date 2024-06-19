@@ -117,7 +117,9 @@ fun HomeScreen(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Button(
-                    onClick = { navigationRouter.navigateToAddScreen() },
+                    onClick = {
+                        homeScreenViewModel.stopTimer()
+                        navigationRouter.navigateToAddScreen() },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF6750A4)),
                     modifier = Modifier.padding(8.dp)
                 ) {
