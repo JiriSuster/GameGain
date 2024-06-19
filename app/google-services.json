@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "367981354281",
-    "project_id": "android-project-4b0c8",
-    "storage_bucket": "android-project-4b0c8.appspot.com"
+    "project_number": "1031231309976",
+    "project_id": "gamegain-25f98",
+    "storage_bucket": "gamegain-25f98.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:367981354281:android:2f8cd22e5a28fbb5636b38",
+        "mobilesdk_app_id": "1:1031231309976:android:0e4087cccef347699e68ed",
         "android_client_info": {
           "package_name": "cz.mendelu.pef.project.gamegian"
         }
@@ -15,26 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB9vdmv8ZwKqcoO4jhuYaVHmk_L0ZfQwM0"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:367981354281:android:10e6da1e03cde5c6636b38",
-        "android_client_info": {
-          "package_name": "cz.mendelu.testgrafu"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyB9vdmv8ZwKqcoO4jhuYaVHmk_L0ZfQwM0"
+          "current_key": "AIzaSyBphMvhWe15sOhqj_Cx44tDG4a3Wce18Fo"
         }
       ],
       "services": {

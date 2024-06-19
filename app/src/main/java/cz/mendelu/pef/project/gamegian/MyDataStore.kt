@@ -17,6 +17,7 @@ class MyDataStore(private val dataStore: DataStore<Preferences>) {
         val username: Preferences.Key<String> = stringPreferencesKey("username")
         val token: Preferences.Key<String> = stringPreferencesKey("token")
         val time: Preferences.Key<Long> = longPreferencesKey("time")
+        val dismissedFirstScreen: Preferences.Key<Boolean> = booleanPreferencesKey("dismiss")
     }
 
     // Update methods

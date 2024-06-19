@@ -22,6 +22,8 @@ lifecycle = "2.7.0"
 
 androidx_datastore_preferences_core = "1.1.1"
 firebaseFirestore = "25.0.0"
+googleServicesVersion = "4.4.2"
+firebaseFirestoreVersion = "25.0.0"
 
 
 [libraries]
@@ -42,8 +44,6 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 
 composenumberpicker = { group = "com.chillibits", name = "composenumberpicker", version.ref = "numberPicker" }
 donut = { group = "app.futured.donut", name = "donut-compose", version.ref = "donutChart" }
-google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServices" }
-firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 
 navigation-compose = {group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose"}
 room-lifecycle = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "room" }
@@ -64,7 +64,8 @@ moshi-kapt = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", vers
 lifecycle = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
 
 androidx_datastore_preferences_core = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "androidx_datastore_preferences_core" }
-firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
+google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServicesVersion" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestoreVersion" }
 
 
 

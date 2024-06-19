@@ -49,13 +49,7 @@ class NavigationRouterImpl(private val navController: NavController) : INavigati
     }
 
     override fun navigateTo(route: String) {
-        navController.navigate(route) {
-            popUpTo(navController.graph.startDestinationRoute!!) {
-                saveState = true
-            }
-            launchSingleTop = true
-            restoreState = true
-        }
+        navController.navigate(route)
     }
 
 

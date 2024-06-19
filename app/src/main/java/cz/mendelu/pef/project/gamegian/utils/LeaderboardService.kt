@@ -4,7 +4,6 @@ import android.util.Log
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.firestore
-import com.google.firebase.firestore.ktx.firestore
 
 data class LeaderboardEntry(
     val username: String = "",
