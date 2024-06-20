@@ -22,6 +22,8 @@ class MainActivity : ComponentActivity() {
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
+
         super.onCreate(savedInstanceState)
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
@@ -38,7 +40,6 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        // Check system language on activity creation
         checkSystemLanguage()
     }
 
@@ -53,11 +54,9 @@ class MainActivity : ComponentActivity() {
     private fun checkSystemLanguage() {
         val locale = getCurrentLocale()
         if (locale.language == "cs") {
-            // Language is set to Czech, switch resources to values-cs
             resources.configuration.setLocale(locale)
             resources.updateConfiguration(resources.configuration, resources.displayMetrics)
         } else {
-            // Reset to default resources (values)
             resources.configuration.setLocale(Locale.getDefault())
             resources.updateConfiguration(resources.configuration, resources.displayMetrics)
         }
