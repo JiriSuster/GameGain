@@ -50,4 +50,17 @@ class LeaderBoardService {
                 Log.w(TAG, "Error getting documents.", exception)
             }
     }
+
+    fun usernameExists(username: String, callback: (Boolean) -> Unit) {
+        db.collection("Leaderboard")
+            .whereEqualTo("username", username)
+            .get()
+            .addOnSuccessListener { result ->
+                callback(!result.isEmpty)
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error checking username existence.", exception)
+                callback(false)
+            }
+    }
 }

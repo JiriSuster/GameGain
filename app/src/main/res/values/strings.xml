@@ -84,6 +84,9 @@
     <string name="bottom_nav_timer">Timer</string>
     <string name="bottom_nav_list">List</string>
     <string name="bottom_nav_board">Board</string>
+    <string name="username_exists_error">Username already exists</string>
+    <string name="username_empty_error">Username cannot be empty</string>
+
 
 
 </resources>

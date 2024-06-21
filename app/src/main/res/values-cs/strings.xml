@@ -84,4 +84,7 @@
     <string name="bottom_nav_timer">Časovač</string>
     <string name="bottom_nav_list">Seznam</string>
     <string name="bottom_nav_board">Žebříček</string>
+
+    <string name="username_exists_error">Toto uživatelské jméno již existuje</string>
+    <string name="username_empty_error">Nemůže být prázdné</string>
 </resources>
