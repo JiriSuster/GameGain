@@ -21,8 +21,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import cz.mendelu.pef.project.gamegian.R
-import cz.mendelu.pef.project.gamegian.navigation.bottomNavItems
 import cz.mendelu.pef.project.gamegian.ui.components.BottomNavigationBar
+import cz.mendelu.pef.project.gamegian.ui.components.bottomNavItems
 
 
 @OptIn(ExperimentalMaterial3Api::class)

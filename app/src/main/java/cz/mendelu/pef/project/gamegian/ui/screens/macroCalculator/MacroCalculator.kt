@@ -43,8 +43,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 import androidx.compose.ui.res.stringResource
 import cz.mendelu.pef.project.gamegian.R
-import cz.mendelu.pef.project.gamegian.navigation.bottomNavItems
 import cz.mendelu.pef.project.gamegian.ui.components.BottomNavigationBar
+import cz.mendelu.pef.project.gamegian.ui.components.bottomNavItems
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -135,9 +135,6 @@ fun MacroCalculator(navigationRouter: INavigationRouter){
                             )
                         }
                     }
-                }
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(imageVector = Icons.Default.Info, contentDescription = null)
                 }
             }
 

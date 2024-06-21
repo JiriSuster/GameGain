@@ -20,9 +20,9 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import cz.mendelu.pef.project.gamegian.R
 import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
-import cz.mendelu.pef.project.gamegian.navigation.bottomNavItems
 import cz.mendelu.pef.project.gamegian.toReadableTime
 import cz.mendelu.pef.project.gamegian.ui.components.BottomNavigationBar
+import cz.mendelu.pef.project.gamegian.ui.components.bottomNavItems
 import cz.mendelu.pef.project.gamegian.ui.screens.LeaderBoardViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)

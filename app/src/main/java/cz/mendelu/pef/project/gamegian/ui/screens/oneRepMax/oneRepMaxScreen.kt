@@ -17,8 +17,8 @@ import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 import cz.mendelu.pef.project.gamegian.ui.components.DonutWithText
 import com.chillibits.composenumberpicker.HorizontalNumberPicker
 import cz.mendelu.pef.project.gamegian.R
-import cz.mendelu.pef.project.gamegian.navigation.bottomNavItems
 import cz.mendelu.pef.project.gamegian.ui.components.BottomNavigationBar
+import cz.mendelu.pef.project.gamegian.ui.components.bottomNavItems
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

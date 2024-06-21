@@ -26,8 +26,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.chillibits.composenumberpicker.VerticalNumberPicker
 import cz.mendelu.pef.project.gamegian.R
-import cz.mendelu.pef.project.gamegian.navigation.bottomNavItems
 import cz.mendelu.pef.project.gamegian.ui.components.BottomNavigationBar
+import cz.mendelu.pef.project.gamegian.ui.components.bottomNavItems
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -219,7 +219,7 @@ fun AddScreen(navigationRouter: INavigationRouter) {
                     .wrapContentSize(Alignment.Center)
             ) {
                 Button(onClick = {
-                    viewModel.walking.steps = steps.toInt()
+                    viewModel.walking.steps = steps.toIntOrNull() ?: 0
                     viewModel.walking.date = System.currentTimeMillis()
                     viewModel.addWalking()
                     navigationRouter.navigateToListScreen()
