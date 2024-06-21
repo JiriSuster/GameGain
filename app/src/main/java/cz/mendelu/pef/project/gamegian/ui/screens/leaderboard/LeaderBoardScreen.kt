@@ -1,11 +1,10 @@
+package cz.mendelu.pef.project.gamegian.ui.screens.leaderboard
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
@@ -23,7 +22,6 @@ import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 import cz.mendelu.pef.project.gamegian.toReadableTime
 import cz.mendelu.pef.project.gamegian.ui.components.BottomNavigationBar
 import cz.mendelu.pef.project.gamegian.ui.components.bottomNavItems
-import cz.mendelu.pef.project.gamegian.ui.screens.LeaderBoardViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,7 +37,7 @@ fun LeaderBoardScreen(navigationRouter: INavigationRouter) {
             BottomNavigationBar(navigationRouter = navigationRouter, items = bottomNavItems)
         },
         topBar = {
-            TopAppBar(
+            CenterAlignedTopAppBar(
                 navigationIcon = {
                     IconButton(onClick = {
                         navigationRouter.navigateToHomeScreen()
@@ -48,13 +46,10 @@ fun LeaderBoardScreen(navigationRouter: INavigationRouter) {
                     }
                 },
                 title = {
-                    Box(modifier = Modifier.fillMaxWidth()) {
-                        Text(
-                            text = stringResource(id = R.string.leaderboard_title),
-                            modifier = Modifier.align(Alignment.Center),
-                            fontSize = 14.sp
-                        )
-                    }
+                    Text(
+                        text = stringResource(id = R.string.leaderboard_title),
+                        fontSize = 14.sp
+                    )
                 }
             )
         }

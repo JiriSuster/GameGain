@@ -1,4 +1,4 @@
-package cz.mendelu.pef.project.gamegian.ui.screens
+package cz.mendelu.pef.project.gamegian.ui.screens.leaderboard
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.State
 import androidx.lifecycle.ViewModel

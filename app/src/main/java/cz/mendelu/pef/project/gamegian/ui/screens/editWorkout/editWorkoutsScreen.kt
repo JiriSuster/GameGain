@@ -1,6 +1,5 @@
 package cz.mendelu.pef.project.gamegian.ui.screens.editWorkout
 
-import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,6 +10,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -20,7 +20,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -31,7 +30,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -53,12 +51,10 @@ fun EditWorkout(navigationRouter: INavigationRouter, id: Long) {
     var reps by remember { mutableStateOf<Int?>(null) }
     var sets by remember { mutableStateOf<Int?>(null) }
 
-    // Load workout from ViewModel when screen is visited
     LaunchedEffect(key1 = id) {
         viewModel.loadWorkout(id)
     }
 
-    // Update UI state when ViewModel's currentWorkout changes
     LaunchedEffect(viewModel.currentWorkout) {
         viewModel.currentWorkout?.let {
             selectedActivity = it.exercise_name
@@ -72,7 +68,7 @@ fun EditWorkout(navigationRouter: INavigationRouter, id: Long) {
             BottomNavigationBar(navigationRouter = navigationRouter, items = bottomNavItems)
         },
         topBar = {
-            TopAppBar(
+            CenterAlignedTopAppBar(
                 navigationIcon = {
                     IconButton(onClick = {
                         navigationRouter.returnBack()
@@ -81,14 +77,10 @@ fun EditWorkout(navigationRouter: INavigationRouter, id: Long) {
                     }
                 },
                 title = {
-                    Box(modifier = Modifier.fillMaxWidth()) {
-                        Text(
-                            text = stringResource(id = R.string.edit_workout_title),
-                            modifier = Modifier.align(Alignment.Center),
-                            fontSize = 18.sp,
-                            textAlign = TextAlign.Center
-                        )
-                    }
+                    Text(
+                        text = stringResource(id = R.string.edit_workout_title),
+                        fontSize = 14.sp
+                    )
                 }
             )
         }

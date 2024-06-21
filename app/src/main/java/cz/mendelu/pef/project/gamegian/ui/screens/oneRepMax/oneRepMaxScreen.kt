@@ -34,15 +34,12 @@ fun OneRepMax(navigationRouter: INavigationRouter) {
             BottomNavigationBar(navigationRouter = navigationRouter, items = bottomNavItems)
         },
         topBar = {
-            TopAppBar(
+            CenterAlignedTopAppBar(
                 title = {
-                    Box(modifier = Modifier.fillMaxWidth()) {
-                        Text(
-                            text = stringResource(id = R.string.one_rep_max_title),
-                            modifier = Modifier.align(Alignment.Center),
-                            fontSize = 14.sp
-                        )
-                    }
+                    Text(
+                        text = stringResource(id = R.string.one_rep_max_title),
+                        fontSize = 14.sp
+                    )
                 },
                 navigationIcon = {
                     IconButton(onClick = {

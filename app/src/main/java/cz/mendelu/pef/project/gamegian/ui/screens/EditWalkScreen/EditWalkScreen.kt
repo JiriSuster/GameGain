@@ -10,13 +10,13 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -27,7 +27,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -42,12 +41,10 @@ fun EditWalkScreen(navigationRouter: INavigationRouter, id: Long) {
     val viewModel = hiltViewModel<EditWalkViewModel>()
     var steps by remember { mutableStateOf(0) }
 
-    // Load workout from ViewModel when screen is visited
     LaunchedEffect(key1 = id) {
         viewModel.loadWalk(id)
     }
 
-    // Update UI state when ViewModel's currentWorkout changes
     LaunchedEffect(viewModel.currentWalk) {
         viewModel.currentWalk?.let {
             steps = it.steps
@@ -59,7 +56,7 @@ fun EditWalkScreen(navigationRouter: INavigationRouter, id: Long) {
             BottomNavigationBar(navigationRouter = navigationRouter, items = bottomNavItems)
         },
         topBar = {
-            TopAppBar(
+            CenterAlignedTopAppBar(
                 navigationIcon = {
                     IconButton(onClick = {
                         navigationRouter.returnBack()
@@ -68,14 +65,10 @@ fun EditWalkScreen(navigationRouter: INavigationRouter, id: Long) {
                     }
                 },
                 title = {
-                    Box(modifier = Modifier.fillMaxWidth()) {
-                        Text(
-                            text = stringResource(R.string.edit_walk_title),
-                            modifier = Modifier.align(Alignment.Center),
-                            fontSize = 18.sp,
-                            textAlign = TextAlign.Center
-                        )
-                    }
+                    Text(
+                        text = stringResource(id = R.string.edit_walk_title),
+                        fontSize = 14.sp
+                    )
                 }
             )
         }

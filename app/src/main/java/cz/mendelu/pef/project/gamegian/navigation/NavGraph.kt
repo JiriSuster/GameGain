@@ -1,6 +1,6 @@
 package cz.mendelu.pef.project.gamegian.navigation
 
-import LeaderBoardScreen
+import cz.mendelu.pef.project.gamegian.ui.screens.leaderboard.LeaderBoardScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController

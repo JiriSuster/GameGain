@@ -1,9 +1,6 @@
 package cz.mendelu.pef.project.gamegian.ui.screens.firstScreen
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -11,9 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import cz.mendelu.pef.project.gamegian.MyDataStore
 import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
-import kotlinx.coroutines.flow.first
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
 import cz.mendelu.pef.project.gamegian.R

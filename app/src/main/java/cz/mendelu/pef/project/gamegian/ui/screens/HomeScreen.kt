@@ -24,14 +24,11 @@ import cz.mendelu.pef.project.gamegian.R
 import cz.mendelu.pef.project.gamegian.ui.components.BottomNavigationBar
 import cz.mendelu.pef.project.gamegian.ui.components.bottomNavItems
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     navigationRouter: INavigationRouter
 ) {
-
-
     val homeScreenViewModel = hiltViewModel<HomeScreenViewModel>()
     val myDataStore = homeScreenViewModel.myDataStore
     val context = LocalContext.current
@@ -53,85 +50,93 @@ fun HomeScreen(
             BottomNavigationBar(navigationRouter = navigationRouter, items = bottomNavItems)
         },
         topBar = {
-            TopAppBar(
+            CenterAlignedTopAppBar(
                 title = {
-                    Box(modifier = Modifier.fillMaxWidth()) {
-                        Text(
-                            text = stringResource(id = R.string.timer_title),
-                            modifier = Modifier.align(Alignment.Center),
-                            fontSize = 14.sp
-                        )
-                    }
+                    Text(
+                        text = stringResource(id = R.string.timer_title),
+                        fontSize = 14.sp
+                    )
                 }
             )
         }
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(it),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+    ) { paddingValues ->
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingValues)
         ) {
-            
-            Text(text = appVersion)
-            Text(
-                text = stringResource(id = if (username.isNotEmpty()) R.string.welcome_message else R.string.guest_welcome_message, username),
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold
-            )
-
-            Spacer(modifier = Modifier.height(32.dp))
-
-            Text(
-                text = stringResource(id = R.string.play_for),
-                fontSize = 16.sp,
-            )
-
-            Text(
-                text = remainingTime.toReadableTime(),
-                fontSize = 40.sp,
-                fontWeight = FontWeight.Bold,
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Button(
-                onClick = { homeScreenViewModel.toggleTimer() },
+            Column(
                 modifier = Modifier
-                    .height(65.dp)
-                    .width(200.dp)
-                    .shadow(4.dp, RoundedCornerShape(30.dp)),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFFF4EDFF),
-                    contentColor = Color(0xFF7E57C2)
+                    .fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = stringResource(id = if (username.isNotEmpty()) R.string.welcome_message else R.string.guest_welcome_message, username),
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
                 )
-            ) {
-                Text(text = stringResource(id = if (isTimerRunning) R.string.stop_timer_button else R.string.start_timer_button))
-            }
 
-            Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(32.dp))
 
-            Row(
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                modifier = Modifier.fillMaxWidth()
-            ) {
+                Text(
+                    text = stringResource(id = R.string.play_for),
+                    fontSize = 16.sp,
+                )
+
+                Text(
+                    text = remainingTime.toReadableTime(),
+                    fontSize = 40.sp,
+                    fontWeight = FontWeight.Bold,
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
                 Button(
-                    onClick = {
-                        homeScreenViewModel.stopTimer()
-                        navigationRouter.navigateToAddScreen() },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF6750A4)),
-                    modifier = Modifier.padding(8.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Add,
-                        contentDescription = stringResource(id = R.string.add_time_button),
-                        tint = Color.White
+                    onClick = { homeScreenViewModel.toggleTimer() },
+                    modifier = Modifier
+                        .height(65.dp)
+                        .width(200.dp)
+                        .shadow(4.dp, RoundedCornerShape(30.dp)),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFFF4EDFF),
+                        contentColor = Color(0xFF7E57C2)
                     )
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Text(text = stringResource(id = R.string.add_time_button), color = Color.White)
+                ) {
+                    Text(text = stringResource(id = if (isTimerRunning) R.string.stop_timer_button else R.string.start_timer_button))
+                }
+
+                Spacer(modifier = Modifier.height(32.dp))
+
+                Row(
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Button(
+                        onClick = {
+                            homeScreenViewModel.stopTimer()
+                            navigationRouter.navigateToAddScreen()
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF6750A4)),
+                        modifier = Modifier.padding(8.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Add,
+                            contentDescription = stringResource(id = R.string.add_time_button),
+                            tint = Color.White
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(text = stringResource(id = R.string.add_time_button), color = Color.White)
+                    }
                 }
             }
+
+            Text(
+                text = "Version: $appVersion",
+                modifier = Modifier
+                    .align(Alignment.BottomStart),
+                fontSize = 14.sp,
+                color = Color.Gray
+            )
         }
     }
 }

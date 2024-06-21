@@ -8,23 +8,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.chillibits.composenumberpicker.VerticalNumberPicker
 import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
-
-
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.chillibits.composenumberpicker.VerticalNumberPicker
 import cz.mendelu.pef.project.gamegian.R
 import cz.mendelu.pef.project.gamegian.ui.components.BottomNavigationBar
 import cz.mendelu.pef.project.gamegian.ui.components.bottomNavItems
@@ -54,7 +43,7 @@ fun AddScreen(navigationRouter: INavigationRouter) {
             BottomNavigationBar(navigationRouter = navigationRouter, items = bottomNavItems)
         },
         topBar = {
-            TopAppBar(
+            CenterAlignedTopAppBar(
                 navigationIcon = {
                     IconButton(onClick = {
                         navigationRouter.returnBack()
@@ -63,13 +52,10 @@ fun AddScreen(navigationRouter: INavigationRouter) {
                     }
                 },
                 title = {
-                    Box(modifier = Modifier.fillMaxWidth()) {
-                        Text(
-                            text = stringResource(R.string.add_time_title),
-                            modifier = Modifier.align(Alignment.Center),
-                            fontSize = 14.sp
-                        )
-                    }
+                    Text(
+                        text = stringResource(id = R.string.add_time_title),
+                        fontSize = 14.sp
+                    )
                 }
             )
         }
