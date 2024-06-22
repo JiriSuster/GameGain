@@ -30,7 +30,7 @@ class LeaderBoardViewModel @Inject constructor(
 
     fun fetchScores() {
         leaderBoardService.getLeaderboard { leaderboard ->
-            scores.value = leaderboard.map { it.username to it.score }
+            scores.value = leaderboard.filter { it.score > 0 }.map { it.username to it.score }
         }
     }
 

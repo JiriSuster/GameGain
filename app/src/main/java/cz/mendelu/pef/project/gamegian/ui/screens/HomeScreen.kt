@@ -28,13 +28,13 @@ import cz.mendelu.pef.project.gamegian.ui.components.bottomNavItems
 fun HomeScreen(
     navigationRouter: INavigationRouter
 ) {
-    val homeScreenViewModel = hiltViewModel<HomeScreenViewModel>()
-    val myDataStore = homeScreenViewModel.myDataStore
     val context = LocalContext.current
+    val homeScreenViewModel = hiltViewModel<HomeScreenViewModel>()
+    homeScreenViewModel.setContext(context)
+    val myDataStore = homeScreenViewModel.myDataStore
     val packageInfo = remember {
         context.packageManager.getPackageInfo(context.packageName, 0)
     }
-
     val appVersion = packageInfo.versionName
     val usernameState by myDataStore.watchUsername().collectAsState(initial = null)
 
