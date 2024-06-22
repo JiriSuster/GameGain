@@ -35,15 +35,11 @@
     <string name="activity_sit_ups">sit-ups</string>
     <string name="activity_pull_ups">pull-ups</string>
     <string name="activity_dips">dips</string>
-
     <string name="edit_study_title">Edit Study</string>
     <string name="edit_button_text">Edit</string>
-
     <string name="edit_walk_title">Edit Walking</string>
-
     <string name="edit_workout_title">Edit Workout</string>
     <string name="save_button_text">Save</string>
-
     <string name="join_leaderboard_title">Join the Leaderboard!</string>
     <string name="join_leaderboard_description">Help us make your experience even better by providing some details. This will allow you to join our leaderboard and get more accurate calculations.</string>
     <string name="username_hint">Username</string>
@@ -51,14 +47,11 @@
     <string name="female_label">Female</string>
     <string name="join_button_text">Join leaderboard \uD83D\uDE0A</string>
     <string name="proceed_button_text">Proceed without joining \uD83D\uDE1E</string>
-
     <string name="add_first_activity">Add your first activity</string>
-
     <string name="one_rep_max_title">One Rep Max</string>
     <string name="your_one_rep_max">Your one rep max is:</string>
     <string name="calculate_button">Calculate</string>
     <string name="weight_label">Weight</string>
-
     <string name="timer_title">Timer</string>
     <string name="leaderboard_button">Leaderboard</string>
     <string name="macro_calculator_button">Macro Calculator</string>
@@ -70,15 +63,12 @@
     <string name="stop_timer_button">Stop Timer</string>
     <string name="add_time_button">Add Time</string>
     <string name="activities_button">Activities</string>
-
     <string name="username_label">Username:</string>
     <string name="score_label">Score:</string>
     <string name="leaderboard_title">leaderboard</string>
-
     <string name="activities_title">Activities</string>
     <string name="no_activities_message">No activities yet \uD83D\uDE13</string>
     <string name="add_new_activity">Add new activity</string>
-
     <string name="bottom_nav_1rm">1RM</string>
     <string name="bottom_nav_macro">Macro</string>
     <string name="bottom_nav_timer">Timer</string>
@@ -90,6 +80,10 @@
     <string name="error_invalid_workout">Invalid workout details</string>
     <string name="error_invalid_studying">Invalid studying details</string>
     <string name="error_invalid_walking">Invalid walking details</string>
+    <string name="study_card_studying">Studying</string>
+    <string name="walk_card_steps">steps</string>
+    <string name="error_invalid_input">Invalid input</string>
+
 
 
 

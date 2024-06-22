@@ -16,6 +16,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -40,6 +43,10 @@ import cz.mendelu.pef.project.gamegian.ui.components.bottomNavItems
 fun EditWalkScreen(navigationRouter: INavigationRouter, id: Long) {
     val viewModel = hiltViewModel<EditWalkViewModel>()
     var steps by remember { mutableStateOf(0) }
+
+    val snackbarHostState = remember { SnackbarHostState() }
+    val (showError, setShowError) = remember { mutableStateOf(false) }
+    val errorMessage = stringResource(id = R.string.error_invalid_input)
 
     LaunchedEffect(key1 = id) {
         viewModel.loadWalk(id)
@@ -71,7 +78,8 @@ fun EditWalkScreen(navigationRouter: INavigationRouter, id: Long) {
                     )
                 }
             )
-        }
+        },
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
     ) { paddingValues ->
         Column(
             Modifier
@@ -101,12 +109,26 @@ fun EditWalkScreen(navigationRouter: INavigationRouter, id: Long) {
                     .wrapContentSize(Alignment.Center)
             ) {
                 Button(onClick = {
-                    viewModel.updateWalk(
-                        steps = steps
-                    )
-                    navigationRouter.navigateToListScreen()
+                    if(steps == 0){
+                        setShowError(true)
+                    }
+                    else {
+                        viewModel.updateWalk(
+                            steps = steps
+                        )
+                        navigationRouter.navigateToListScreen()
+                    }
                 }) {
                     Text(text = stringResource(R.string.edit_button_text))
+                }
+            }
+            if (showError) {
+                LaunchedEffect(snackbarHostState) {
+                    snackbarHostState.showSnackbar(
+                        message = errorMessage,
+                        duration = SnackbarDuration.Short
+                    )
+                    setShowError(false)
                 }
             }
         }

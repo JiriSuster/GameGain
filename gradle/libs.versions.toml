@@ -1,5 +1,6 @@
 [versions]
 agp = "8.3.2"
+coreSplashscreen = "1.0.1"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -8,26 +9,22 @@ espressoCore = "3.5.1"
 lifecycleRuntimeKtx = "2.8.0"
 activityCompose = "1.9.0"
 composeBom = "2023.08.00"
-
 numberPicker = "1.1.1"
 donutChart = "2.2.3"
-googleServices = "4.4.2"
-firebaseAuth = "23.0.0"
 navigation-compose = "2.7.7"
 room = "2.6.1"
 hilt = "2.48"
 hilt-compose = "1.1.0"
 moshi = "1.15.0"
 lifecycle = "2.7.0"
-
 androidx_datastore_preferences_core = "1.1.1"
-firebaseFirestore = "25.0.0"
 googleServicesVersion = "4.4.2"
 firebaseFirestoreVersion = "25.0.0"
-
+splashscreenVersion = "1.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -44,15 +41,9 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 
 composenumberpicker = { group = "com.chillibits", name = "composenumberpicker", version.ref = "numberPicker" }
 donut = { group = "app.futured.donut", name = "donut-compose", version.ref = "donutChart" }
-
 navigation-compose = {group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose"}
 room-lifecycle = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "room" }
-
 room-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "room" }
-
-
-
-
 room-ktx = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler-kapt = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
@@ -62,11 +53,10 @@ hilt-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", vers
 moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
 moshi-kapt = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
 lifecycle = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
-
 androidx_datastore_preferences_core = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "androidx_datastore_preferences_core" }
 google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServicesVersion" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestoreVersion" }
-
+splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreenVersion" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

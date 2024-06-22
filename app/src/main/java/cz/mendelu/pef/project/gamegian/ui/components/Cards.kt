@@ -11,7 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import cz.mendelu.pef.project.gamegian.R
 import cz.mendelu.pef.project.gamegian.model.Study
 import cz.mendelu.pef.project.gamegian.model.Walk
 import cz.mendelu.pef.project.gamegian.model.Workout
@@ -31,8 +33,8 @@ fun StudyCard(study: Study, onDelete: (Any) -> Unit, navigationRouter: INavigati
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column {
-                Text(text = "Studying ${study.studyHours}h ${study.studyMinutes}m")
-                Text(text = "+" + study.time.toReadableTime())
+                Text(text = "${stringResource(R.string.study_card_studying)} ${study.studyHours}h ${study.studyMinutes}m")
+                Text(text = "+ " + study.time.toReadableTime())
             }
 
             Spacer(modifier = Modifier.weight(1f))
@@ -61,8 +63,8 @@ fun WalkCard(walk: Walk, onDelete: (Any) -> Unit, navigationRouter: INavigationR
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column {
-                Text(text = "${walk.steps} steps")
-                Text(text = "+" +walk.time.toReadableTime())
+                Text(text = "${walk.steps} ${stringResource(R.string.walk_card_steps)}")
+                Text(text = "+ " + walk.time.toReadableTime())
             }
 
             Spacer(modifier = Modifier.weight(1f))
@@ -92,7 +94,7 @@ fun WorkoutCard(workout: Workout, onDelete: (Any) -> Unit, navigationRouter: INa
         ) {
             Column {
                 Text(text = "${workout.exercise_name} ${workout.reps}x${workout.sets}")
-                Text(text = "+" + workout.time.toReadableTime())
+                Text(text = "+ " + workout.time.toReadableTime())
             }
 
             Spacer(modifier = Modifier.weight(1f))

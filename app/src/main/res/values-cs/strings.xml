@@ -35,15 +35,11 @@
     <string name="activity_sit_ups">sedů-lehů</string>
     <string name="activity_pull_ups">shybů</string>
     <string name="activity_dips">tricepsových kliků</string>
-
     <string name="edit_study_title">Upravit studium</string>
     <string name="edit_button_text">Upravit</string>
-
     <string name="edit_walk_title">Upravit chůzi</string>
-
     <string name="edit_workout_title">Upravit trénink</string>
     <string name="save_button_text">Uložit</string>
-
     <string name="join_leaderboard_title">Připojte se k žebříčku!</string>
     <string name="join_leaderboard_description">Pomozte nám zlepšit vaše zkušenosti tím, že poskytnete několik údajů. To vám umožní připojit se k našemu žebříčku a získat přesnější výpočty.</string>
     <string name="username_hint">Uživatelské jméno</string>
@@ -51,15 +47,12 @@
     <string name="female_label">Žena</string>
     <string name="join_button_text">Připojit se k žebříčku \uD83D\uDE0A</string>
     <string name="proceed_button_text">Pokračovat bez připojení \uD83D\uDE1E</string>
-
     <string name="activities_title">Aktivity</string>
     <string name="add_first_activity">Přidat první aktivitu</string>
-
     <string name="one_rep_max_title">Maximální váha na 1 opakování</string>
     <string name="your_one_rep_max">Vaše maximální váha na 1 opakování:</string>
     <string name="calculate_button">Vypočítat</string>
     <string name="weight_label">Hmotnost</string>
-
     <string name="timer_title">Časovač</string>
     <string name="leaderboard_button">Žebříček</string>
     <string name="macro_calculator_button">Makrokalkulačka</string>
@@ -71,26 +64,25 @@
     <string name="stop_timer_button">Zastavit časovač</string>
     <string name="add_time_button">Přidat čas</string>
     <string name="activities_button">Aktivity</string>
-
     <string name="username_label">Uživatelské jméno:</string>
     <string name="score_label">Skóre:</string>
     <string name="leaderboard_title">Žebříček</string>
-
     <string name="no_activities_message">Zatím žádné aktivity \uD83D\uDE13</string>
     <string name="add_new_activity">Přidejte novou aktivitu</string>
-
     <string name="bottom_nav_1rm">1RM</string>
     <string name="bottom_nav_macro">Makra</string>
     <string name="bottom_nav_timer">Časovač</string>
     <string name="bottom_nav_list">Seznam</string>
     <string name="bottom_nav_board">Žebříček</string>
-
     <string name="username_exists_error">Toto uživatelské jméno již existuje</string>
     <string name="username_empty_error">Nemůže být prázdné</string>
     <string name="or">nebo</string>
-
     <string name="error_invalid_workout">Neplatné údaje o cvičení</string>
     <string name="error_invalid_studying">Neplatné údaje o studiu</string>
     <string name="error_invalid_walking">Neplatné údaje o chůzi</string>
+    <string name="study_card_studying">Studování</string>
+    <string name="walk_card_steps">kroků</string>
+    <string name="error_invalid_input">Neplatný vstup</string>
+
 
 </resources>

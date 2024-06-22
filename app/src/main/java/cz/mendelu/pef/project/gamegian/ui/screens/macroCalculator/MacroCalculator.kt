@@ -28,21 +28,26 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 import androidx.compose.ui.res.stringResource
 import cz.mendelu.pef.project.gamegian.R
 import cz.mendelu.pef.project.gamegian.ui.components.BottomNavigationBar
 import cz.mendelu.pef.project.gamegian.ui.components.bottomNavItems
+
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -74,6 +79,11 @@ fun MacroCalculator(navigationRouter: INavigationRouter){
 
     val (result, setResult) = remember { mutableStateOf<MacroResult?>(null) }
 
+    val snackbarHostState = remember { SnackbarHostState() }
+    val (showError, setShowError) = remember { mutableStateOf(false) }
+    val (errorMessage, setErrorMessage) = remember { mutableStateOf("") }
+    val errormsg = stringResource(id = R.string.error_invalid_input)
+
     Scaffold(
         bottomBar = {
             BottomNavigationBar(navigationRouter = navigationRouter, items = bottomNavItems)
@@ -94,12 +104,13 @@ fun MacroCalculator(navigationRouter: INavigationRouter){
                     }
                 }
             )
-        }
+        },
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(it)
+                .padding(paddingValues = it)
                 .padding(horizontal = 16.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -205,7 +216,10 @@ fun MacroCalculator(navigationRouter: INavigationRouter){
                     val weightDouble = weight.toDoubleOrNull()
                     val heightDouble = height.toDoubleOrNull()
 
-                    if (ageInt != null && weightDouble != null && heightDouble != null) {
+                    if (ageInt == null || weightDouble == null || heightDouble == null) {
+                        setShowError(true)
+                        setErrorMessage(errormsg)
+                    } else {
                         setResult(viewModel.calculateMacros(ageInt, weightDouble, heightDouble, selectedActivity, selectedGoal))
                     }
                 },
@@ -234,17 +248,27 @@ fun MacroCalculator(navigationRouter: INavigationRouter){
                     }
                 }
             }
+
+            if (showError) {
+                LaunchedEffect(snackbarHostState) {
+                    snackbarHostState.showSnackbar(
+                        message = errorMessage,
+                        duration = SnackbarDuration.Short
+                    )
+                    setShowError(false)
+                }
+            }
         }
     }
 }
 
-@Composable
-fun NutrientItem(label: String, value: Int) {
-    Box(
-        modifier = Modifier
-            .background(color = Color(0xFFFEF7FF))
-            .padding(horizontal = 24.dp, vertical = 8.dp)
-    ) {
-        Text(text = "$label \n$value g")
+    @Composable
+    fun NutrientItem(label: String, value: Int) {
+        Box(
+            modifier = Modifier
+                .background(color = Color(0xFFFEF7FF))
+                .padding(horizontal = 24.dp, vertical = 8.dp)
+        ) {
+            Text(text = "$label \n$value g")
+        }
     }
-}

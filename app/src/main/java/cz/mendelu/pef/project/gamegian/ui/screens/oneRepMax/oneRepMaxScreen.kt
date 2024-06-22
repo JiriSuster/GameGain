@@ -29,6 +29,11 @@ fun OneRepMax(navigationRouter: INavigationRouter) {
     var oneRepMax by remember { mutableFloatStateOf(viewModel.oneRepMax) }
     var percentages by remember { mutableStateOf(viewModel.percentages) }
 
+    var showError by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf("") }
+
+    val snackbarHostState = remember { SnackbarHostState() }
+    val invalidImput = stringResource(id = R.string.error_invalid_input)
     Scaffold(
         bottomBar = {
             BottomNavigationBar(navigationRouter = navigationRouter, items = bottomNavItems)
@@ -49,7 +54,8 @@ fun OneRepMax(navigationRouter: INavigationRouter) {
                     }
                 }
             )
-        }
+        },
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
     ) {
         Column(
             Modifier
@@ -87,9 +93,14 @@ fun OneRepMax(navigationRouter: INavigationRouter) {
 
             Button(
                 onClick = {
-                    viewModel.calculateOneRepMax()
-                    oneRepMax = viewModel.oneRepMax
-                    percentages = viewModel.percentages
+                    if (weight <= 0 || reps <= 0) {
+                        showError = true
+                        errorMessage = invalidImput
+                    } else {
+                        viewModel.calculateOneRepMax()
+                        oneRepMax = viewModel.oneRepMax
+                        percentages = viewModel.percentages
+                    }
                 },
                 modifier = Modifier.padding(vertical = 16.dp)
             ) {
@@ -100,9 +111,17 @@ fun OneRepMax(navigationRouter: INavigationRouter) {
                     DonutWithText(
                         percentage = percentage,
                         text = "${"%.2f".format(percentage * 100)}%\n${"%.2f".format(weight)} KG"
-
                     )
                 }
+            }
+        }
+        if (showError) {
+            LaunchedEffect(snackbarHostState) {
+                snackbarHostState.showSnackbar(
+                    message = errorMessage,
+                    duration = SnackbarDuration.Short
+                )
+                showError = false
             }
         }
     }

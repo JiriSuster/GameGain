@@ -15,6 +15,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -40,6 +43,10 @@ fun EditStudyScreen(navigationRouter: INavigationRouter, id: Long) {
     val viewModel = hiltViewModel<EditStudyViewModel>()
     var sliderHoursPosition by remember { mutableStateOf(0f) }
     var sliderMinsPosition by remember { mutableStateOf(0f) }
+
+    val snackbarHostState = remember { SnackbarHostState() }
+    val (showError, setShowError) = remember { mutableStateOf(false) }
+    val errorMessage = stringResource(id = R.string.error_invalid_input)
 
     LaunchedEffect(key1 = id) {
         viewModel.loadStudy(id)
@@ -72,7 +79,8 @@ fun EditStudyScreen(navigationRouter: INavigationRouter, id: Long) {
                     )
                 }
             )
-        }
+        },
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
     ) { paddingValues ->
         Column(
             Modifier
@@ -127,13 +135,27 @@ fun EditStudyScreen(navigationRouter: INavigationRouter, id: Long) {
                     .wrapContentSize(Alignment.Center)
             ) {
                 Button(onClick = {
-                    viewModel.updateStudy(
-                        studyHours = sliderHoursPosition.toInt(),
-                        studyMins = sliderMinsPosition.toInt()
-                    )
-                    navigationRouter.navigateToListScreen()
+                    if(sliderHoursPosition.toInt() == 0 && sliderMinsPosition.toInt() == 0){
+                        setShowError(true)
+                    }
+                    else {
+                        viewModel.updateStudy(
+                            studyHours = sliderHoursPosition.toInt(),
+                            studyMins = sliderMinsPosition.toInt()
+                        )
+                        navigationRouter.navigateToListScreen()
+                    }
                 }) {
                     Text(text = stringResource(R.string.edit_button_text))
+                }
+            }
+            if (showError) {
+                LaunchedEffect(snackbarHostState) {
+                    snackbarHostState.showSnackbar(
+                        message = errorMessage,
+                        duration = SnackbarDuration.Short
+                    )
+                    setShowError(false)
                 }
             }
         }

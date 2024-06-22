@@ -18,6 +18,9 @@ import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -44,12 +47,20 @@ import cz.mendelu.pef.project.gamegian.ui.components.bottomNavItems
 fun EditWorkout(navigationRouter: INavigationRouter, id: Long) {
     val viewModel = hiltViewModel<EditWorkoutsViewModel>()
     val activityOptions = listOf(
-        "biceps curls", "push-ups", "sit-ups", "pull-ups", "dips"
+        stringResource(R.string.activity_biceps_curls),
+        stringResource(R.string.activity_push_ups),
+        stringResource(R.string.activity_sit_ups),
+        stringResource(R.string.activity_pull_ups),
+        stringResource(R.string.activity_dips)
     )
     var activityExpanded by remember { mutableStateOf(false) }
     var selectedActivity by remember { mutableStateOf<String?>(null) }
     var reps by remember { mutableStateOf<Int?>(null) }
     var sets by remember { mutableStateOf<Int?>(null) }
+
+    val snackbarHostState = remember { SnackbarHostState() }
+    var (showError, setShowError) = remember { mutableStateOf(false) }
+    val errorMessage = stringResource(id = R.string.error_invalid_input)
 
     LaunchedEffect(key1 = id) {
         viewModel.loadWorkout(id)
@@ -83,7 +94,8 @@ fun EditWorkout(navigationRouter: INavigationRouter, id: Long) {
                     )
                 }
             )
-        }
+        },
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
     ) { paddingValues ->
         Column(
             Modifier
@@ -133,13 +145,15 @@ fun EditWorkout(navigationRouter: INavigationRouter, id: Long) {
                         horizontalArrangement = Arrangement.End
                     ) {
                         Button(onClick = {
-                            if (selectedActivity != null && reps != null && sets != null) {
+                            if (selectedActivity != null && reps != null && sets != null && reps != 0 && sets != 0) {
                                 viewModel.updateWorkout(
                                     selectedActivity!!,
                                     reps!!,
                                     sets!!
                                 )
                                 navigationRouter.navigateToListScreen()
+                            }else{
+                                setShowError(true)
                             }
                         }) {
                             Text(text = stringResource(id = R.string.save_button_text))
@@ -170,6 +184,15 @@ fun EditWorkout(navigationRouter: INavigationRouter, id: Long) {
                         Picker(value = it.toFloat(), onValueChange = { newSets ->
                             sets = newSets.toInt()
                         })
+                    }
+                }
+                if (showError) {
+                    LaunchedEffect(snackbarHostState) {
+                        snackbarHostState.showSnackbar(
+                            message = errorMessage,
+                            duration = SnackbarDuration.Short
+                        )
+                        setShowError(false)
                     }
                 }
             }

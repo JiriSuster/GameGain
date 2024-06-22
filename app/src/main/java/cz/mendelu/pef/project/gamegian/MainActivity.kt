@@ -26,7 +26,6 @@ class MainActivity : ComponentActivity() {
 
         super.onCreate(savedInstanceState)
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-
         setContent {
             GameGainTheme {
                 val startDestination = remember {

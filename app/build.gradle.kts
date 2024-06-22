@@ -73,7 +73,6 @@ dependencies {
 
     implementation(libs.composenumberpicker)
     implementation(libs.donut)
-
     implementation(libs.navigation.compose)
     implementation(libs.room.ktx)
     implementation(libs.room.viewmodel)
@@ -87,8 +86,8 @@ dependencies {
     kapt(libs.moshi.kapt)
     implementation(libs.lifecycle)
     implementation(libs.androidx.datastore.preferences.core)
+    //implementation(libs.androidx.core.splashscreen) //nemuzu najit :(
     implementation("androidx.core:core-splashscreen:1.0.1")
-
 
 
 }
