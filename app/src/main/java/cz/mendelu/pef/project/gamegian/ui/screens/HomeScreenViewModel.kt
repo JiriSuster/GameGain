@@ -18,10 +18,8 @@ class HomeScreenViewModel @Inject constructor(
 ) : ViewModel() {
 
     var isTimerRunning by mutableStateOf(false)
-        private set
 
     var remainingTime by mutableStateOf(0L)
-        private set
 
     init {
         viewModelScope.launch {

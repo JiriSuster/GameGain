@@ -44,10 +44,11 @@ class MainActivity : ComponentActivity() {
 
     private fun isFirstLaunch(): Boolean {
         val isFirstLaunch = sharedPreferences.getBoolean(KEY_FIRST_LAUNCH, true)
-        if (isFirstLaunch) {
-            sharedPreferences.edit().putBoolean(KEY_FIRST_LAUNCH, false).apply()
-        }
         return isFirstLaunch
+    }
+
+    fun setFirstLaunchComplete() {
+        sharedPreferences.edit().putBoolean(KEY_FIRST_LAUNCH, false).apply()
     }
 
     private fun checkSystemLanguage() {

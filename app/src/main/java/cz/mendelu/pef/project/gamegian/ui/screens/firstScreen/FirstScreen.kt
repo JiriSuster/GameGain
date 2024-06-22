@@ -1,15 +1,18 @@
 package cz.mendelu.pef.project.gamegian.ui.screens.firstScreen
 
+import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 import androidx.hilt.navigation.compose.hiltViewModel
+import cz.mendelu.pef.project.gamegian.MainActivity
 import cz.mendelu.pef.project.gamegian.R
 
 @Composable
@@ -17,6 +20,8 @@ fun FirstScreen(
     navigationRouter: INavigationRouter,
 ) {
     val viewModel = hiltViewModel<FirstScreenViewModel>()
+    val context = LocalContext.current
+    val mainActivity = context as MainActivity
 
     val usernameState = remember { mutableStateOf("") }
     val isMaleState = remember { mutableStateOf(true) }
@@ -97,6 +102,7 @@ fun FirstScreen(
                                 } else {
                                     viewModel.updateUsername(usernameState.value)
                                     viewModel.updateGender(isMaleState.value)
+                                    mainActivity.setFirstLaunchComplete()
                                     navigationRouter.navigateToHomeScreen()
                                 }
                             }
@@ -109,7 +115,10 @@ fun FirstScreen(
                 Text(text = stringResource(R.string.or))
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(
-                    onClick = { navigationRouter.navigateToHomeScreen() },
+                    onClick = {
+                        mainActivity.setFirstLaunchComplete()
+                        navigationRouter.navigateToHomeScreen()
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.LightGray,
                         contentColor = Color.DarkGray

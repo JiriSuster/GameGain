@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 import cz.mendelu.pef.project.gamegian.toReadableTime
-import kotlinx.coroutines.flow.first
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -37,9 +36,7 @@ fun HomeScreen(
     }
 
     val appVersion = packageInfo.versionName
-    val usernameState by produceState<String?>(initialValue = null) {
-        value = myDataStore.watchUsername().first()
-    }
+    val usernameState by myDataStore.watchUsername().collectAsState(initial = null)
 
     val username = usernameState ?: ""
     val remainingTime by homeScreenViewModel::remainingTime
