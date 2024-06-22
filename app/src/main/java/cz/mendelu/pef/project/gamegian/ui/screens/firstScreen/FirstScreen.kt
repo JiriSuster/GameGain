@@ -106,7 +106,7 @@ fun FirstScreen(
                     Text(text = stringResource(R.string.join_button_text))
                 }
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(text = "or")
+                Text(text = stringResource(R.string.or))
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(
                     onClick = { navigationRouter.navigateToHomeScreen() },

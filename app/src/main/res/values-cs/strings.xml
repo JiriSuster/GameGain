@@ -87,4 +87,5 @@
 
     <string name="username_exists_error">Toto uživatelské jméno již existuje</string>
     <string name="username_empty_error">Nemůže být prázdné</string>
+    <string name="or">nebo</string>
 </resources>
