@@ -8,6 +8,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import cz.mendelu.pef.project.gamegian.MyDataStore
 import cz.mendelu.pef.project.gamegian.utils.calculateTime
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditWalkViewModel @Inject constructor(
-    private val walkRepository: ILocalWalkRepository
+    private val walkRepository: ILocalWalkRepository,
+    private val myDataStore: MyDataStore
 ) : ViewModel() {
 
     var currentWalkId: Long = -1
@@ -29,10 +31,13 @@ class EditWalkViewModel @Inject constructor(
     }
 
     fun updateWalk(steps: Int) {
+
         currentWalk?.let { walk ->
+            val oldTime = calculateTime(walkingSteps= currentWalk!!.steps)
             walk.steps = steps
             walk.time = calculateTime(walkingSteps = steps)
             viewModelScope.launch {
+                myDataStore.appendTime(walk.time - oldTime)
                 walkRepository.update(walk)
             }
         }

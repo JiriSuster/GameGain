@@ -42,7 +42,7 @@ import cz.mendelu.pef.project.gamegian.ui.components.bottomNavItems
 @Composable
 fun EditWalkScreen(navigationRouter: INavigationRouter, id: Long) {
     val viewModel = hiltViewModel<EditWalkViewModel>()
-    var steps by remember { mutableStateOf(0) }
+    var steps by remember { mutableStateOf("") }
 
     val snackbarHostState = remember { SnackbarHostState() }
     val (showError, setShowError) = remember { mutableStateOf(false) }
@@ -54,7 +54,7 @@ fun EditWalkScreen(navigationRouter: INavigationRouter, id: Long) {
 
     LaunchedEffect(viewModel.currentWalk) {
         viewModel.currentWalk?.let {
-            steps = it.steps
+            steps = it.steps.toString()
         }
     }
 
@@ -96,7 +96,7 @@ fun EditWalkScreen(navigationRouter: INavigationRouter, id: Long) {
 
             OutlinedTextField(
                 value = steps.toString(),
-                onValueChange = { steps = it.toInt() },
+                onValueChange = { steps = it },
                 label = { Text(text = stringResource(R.string.steps_label)) },
                 modifier = Modifier.fillMaxWidth()
             )
@@ -109,12 +109,13 @@ fun EditWalkScreen(navigationRouter: INavigationRouter, id: Long) {
                     .wrapContentSize(Alignment.Center)
             ) {
                 Button(onClick = {
-                    if(steps == 0){
+                    val stepsint = steps.toIntOrNull() ?: 0
+                    if(stepsint == 0){
                         setShowError(true)
                     }
                     else {
                         viewModel.updateWalk(
-                            steps = steps
+                            steps = stepsint
                         )
                         navigationRouter.navigateToListScreen()
                     }

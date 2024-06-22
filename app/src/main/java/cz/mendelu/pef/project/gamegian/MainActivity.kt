@@ -2,13 +2,10 @@ package cz.mendelu.pef.project.gamegian
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import cz.mendelu.pef.project.gamegian.navigation.Destination
 import cz.mendelu.pef.project.gamegian.navigation.NavGraph

@@ -1,6 +1,6 @@
-// MacroCalculator.kt
 package cz.mendelu.pef.project.gamegian.ui.screens.macroCalculator
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -35,10 +35,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.platform.LocalContext
 import cz.mendelu.pef.project.gamegian.R
 import cz.mendelu.pef.project.gamegian.ui.components.BottomNavigationBar
 import cz.mendelu.pef.project.gamegian.ui.components.bottomNavItems
-
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -53,6 +53,8 @@ import cz.mendelu.pef.project.gamegian.navigation.INavigationRouter
 @Composable
 fun MacroCalculator(navigationRouter: INavigationRouter){
     val viewModel = hiltViewModel<MacroCalculatorViewModel>()
+
+    val context = LocalContext.current
 
     val activityOptions = listOf(
         stringResource(id = R.string.sedentary),
@@ -220,7 +222,7 @@ fun MacroCalculator(navigationRouter: INavigationRouter){
                         setShowError(true)
                         setErrorMessage(errormsg)
                     } else {
-                        setResult(viewModel.calculateMacros(ageInt, weightDouble, heightDouble, selectedActivity, selectedGoal))
+                        setResult(viewModel.calculateMacros(context, ageInt, weightDouble, heightDouble, selectedActivity, selectedGoal))
                     }
                 },
                 modifier = Modifier.fillMaxWidth(0.8f),
