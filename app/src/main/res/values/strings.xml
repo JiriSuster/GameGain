@@ -87,6 +87,9 @@
     <string name="username_exists_error">Username already exists</string>
     <string name="username_empty_error">Username cannot be empty</string>
     <string name="or">or</string>
+    <string name="error_invalid_workout">Invalid workout details</string>
+    <string name="error_invalid_studying">Invalid studying details</string>
+    <string name="error_invalid_walking">Invalid walking details</string>
 
 
 

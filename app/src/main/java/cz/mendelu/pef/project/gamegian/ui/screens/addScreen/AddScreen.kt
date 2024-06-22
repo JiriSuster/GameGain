@@ -37,6 +37,15 @@ fun AddScreen(navigationRouter: INavigationRouter) {
     var sliderHoursPosition by remember { mutableStateOf(0f) }
     var sliderMinsPosition by remember { mutableStateOf(0f) }
     var steps by remember { mutableStateOf("") }
+    var showError by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf("") }
+
+    val invalidWorkoutError = stringResource(R.string.error_invalid_workout)
+    val invalidStudyingError = stringResource(R.string.error_invalid_studying)
+    val invalidWalkingError = stringResource(R.string.error_invalid_walking)
+
+
+    val snackbarHostState = remember { SnackbarHostState() }
 
     Scaffold(
         bottomBar = {
@@ -58,7 +67,8 @@ fun AddScreen(navigationRouter: INavigationRouter) {
                     )
                 }
             )
-        }
+        },
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
     ) { paddingValues ->
         Column(
             Modifier
@@ -99,12 +109,17 @@ fun AddScreen(navigationRouter: INavigationRouter) {
                         horizontalArrangement = Arrangement.End
                     ) {
                         Button(onClick = {
-                            viewModel.workouting.exercise_name = selectedActivity
-                            viewModel.workouting.reps = reps
-                            viewModel.workouting.sets = sets
-                            viewModel.workouting.date = System.currentTimeMillis()
-                            viewModel.addWorkout()
-                            navigationRouter.navigateToListScreen()
+                            if (reps <= 0 || sets <= 0) {
+                                showError = true
+                                errorMessage = invalidWorkoutError
+                            } else {
+                                viewModel.workouting.exercise_name = selectedActivity
+                                viewModel.workouting.reps = reps
+                                viewModel.workouting.sets = sets
+                                viewModel.workouting.date = System.currentTimeMillis()
+                                viewModel.addWorkout()
+                                navigationRouter.navigateToListScreen()
+                            }
                         }) {
                             Text(text = stringResource(R.string.add_button_text))
                         }
@@ -122,7 +137,7 @@ fun AddScreen(navigationRouter: INavigationRouter) {
                 }
             }
 
-            Spacer(Modifier.height(16.dp))
+            Spacer(Modifier.height(8.dp))
 
             Text(
                 text = stringResource(R.string.studying_label),
@@ -171,17 +186,22 @@ fun AddScreen(navigationRouter: INavigationRouter) {
                     .wrapContentSize(Alignment.Center)
             ) {
                 Button(onClick = {
-                    viewModel.studying.studyHours = sliderHoursPosition.toInt()
-                    viewModel.studying.studyMinutes = sliderMinsPosition.toInt()
-                    viewModel.studying.date = System.currentTimeMillis()
-                    viewModel.addStudying()
-                    navigationRouter.navigateToListScreen()
+                    if (sliderHoursPosition <= 0 && sliderMinsPosition <= 0) {
+                        showError = true
+                        errorMessage = invalidStudyingError
+                    } else {
+                        viewModel.studying.studyHours = sliderHoursPosition.toInt()
+                        viewModel.studying.studyMinutes = sliderMinsPosition.toInt()
+                        viewModel.studying.date = System.currentTimeMillis()
+                        viewModel.addStudying()
+                        navigationRouter.navigateToListScreen()
+                    }
                 }) {
                     Text(text = stringResource(R.string.add_button_text))
                 }
             }
 
-            Spacer(Modifier.height(16.dp))
+            Spacer(Modifier.height(8.dp))
 
             Text(
                 text = stringResource(R.string.walking_label),
@@ -197,7 +217,7 @@ fun AddScreen(navigationRouter: INavigationRouter) {
                 modifier = Modifier.fillMaxWidth()
             )
 
-            Spacer(Modifier.height(16.dp))
+            Spacer(Modifier.height(8.dp))
 
             Box(
                 modifier = Modifier
@@ -205,15 +225,29 @@ fun AddScreen(navigationRouter: INavigationRouter) {
                     .wrapContentSize(Alignment.Center)
             ) {
                 Button(onClick = {
-                    viewModel.walking.steps = steps.toIntOrNull() ?: 0
-                    viewModel.walking.date = System.currentTimeMillis()
-                    viewModel.addWalking()
-                    navigationRouter.navigateToListScreen()
+                    if ((steps.toIntOrNull() ?: 0) <= 0) {
+                        showError = true
+                        errorMessage = invalidWalkingError
+                    } else {
+                        viewModel.walking.steps = steps.toInt()
+                        viewModel.walking.date = System.currentTimeMillis()
+                        viewModel.addWalking()
+                        navigationRouter.navigateToListScreen()
+                    }
                 }) {
                     Text(text = stringResource(R.string.add_button_text))
                 }
             }
 
+            if (showError) {
+                LaunchedEffect(snackbarHostState) {
+                    snackbarHostState.showSnackbar(
+                        message = errorMessage,
+                        duration = SnackbarDuration.Short
+                    )
+                    showError = false
+                }
+            }
         }
     }
 }

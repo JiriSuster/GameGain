@@ -26,7 +26,7 @@ class AddScreenViewModel @Inject constructor(
     var workouting: Workout = Workout(0)
 
     fun addWorkout() {
-        if (workouting.reps <= 0 || workouting.sets <= 0) {
+        if (workouting.reps <= 0 && workouting.sets <= 0) {
             return
         }
 
@@ -39,7 +39,7 @@ class AddScreenViewModel @Inject constructor(
     }
 
     fun addStudying() {
-        if (studying.studyHours <= 0 || studying.studyMinutes <= 0) {
+        if (studying.studyHours <= 0 && studying.studyMinutes <= 0) {
             return
         }
 

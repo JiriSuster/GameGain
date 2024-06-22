@@ -88,4 +88,9 @@
     <string name="username_exists_error">Toto uživatelské jméno již existuje</string>
     <string name="username_empty_error">Nemůže být prázdné</string>
     <string name="or">nebo</string>
+
+    <string name="error_invalid_workout">Neplatné údaje o cvičení</string>
+    <string name="error_invalid_studying">Neplatné údaje o studiu</string>
+    <string name="error_invalid_walking">Neplatné údaje o chůzi</string>
+
 </resources>
