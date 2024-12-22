@@ -31,11 +31,13 @@ Accumulate gaming minutes by completing specific activities:
 ### 4. Fitness Tools  
 - **One-Rep Max Calculator**: Estimate your maximum weight for a single repetition.  
 - **Macro Calculator**: Calculate your daily macronutrient intake to optimize your diet.
+
+## Authors
+- [Jiří Daniel Šuster](https://www.linkedin.com/in/ji%C5%99%C3%AD-daniel-%C5%A1uster-7017b0306/)
+  
 ## Video showcase
 [![Video showcase](store_assets/screenshots/youtube_screenshot.png)](https://www.youtube.com/watch?v=JsbEfHZtHwM "Click to play")
-## Authors
 
-- [Jiří Daniel Šuster](https://www.linkedin.com/in/ji%C5%99%C3%AD-daniel-%C5%A1uster-7017b0306/)
 
 
 ## Screenshots
